@@ -1,8 +1,12 @@
 import React from 'react'
+import Layout from '../components/Layout'
 
 const Groups = () => {
   return (
-    <div>Estas en grupos</div>
+    <Layout tituloPagina="Grupos">
+      <div>Estas en grupos</div>
+    </Layout>
+    
   )
 }
 

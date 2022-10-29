@@ -1,8 +1,11 @@
 import React from 'react'
+import Layout from '../components/Layout'
 
 const Posts = () => {
   return (
-    <div>Estas en los posts</div>
+    <Layout tituloPagina="Publicaciones">
+      <h1>Estas en Posts</h1>
+    </Layout>
   )
 }
 

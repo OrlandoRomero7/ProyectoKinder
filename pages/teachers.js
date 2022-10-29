@@ -1,8 +1,12 @@
 import React from 'react'
+import Layout from '../components/Layout'
 
 const Teachers = () => {
   return (
-    <div>Estas en Docentes</div>
+    <Layout tituloPagina="Docentes">
+      <div>Estas en Docentes</div>
+    </Layout>
+    
   )
 }
 
