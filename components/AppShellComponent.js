@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from '../styles/AppShell.module.css'
 import {
   AppShell,
   Navbar,
@@ -10,10 +11,11 @@ import {
   NavLink,
 } from "@mantine/core";
 import {
-  IconHome2,
   IconCheckupList,
-  IconCalculator,
   IconSearch,
+  IconUsers,
+  IconClipboardList,
+  IconUser,
 } from "@tabler/icons";
 import Link from "next/link";
 
@@ -32,17 +34,12 @@ const AppShellComponent = ({ children }) => {
       }}
       navbarOffsetBreakpoint="sm"
       navbar={
-        <Navbar
-          p="md"
-          hiddenBreakpoint="sm"
-          hidden={!opened}
-          width={{ sm: 200, lg: 300 }}
-        >
+        <Navbar p="md"  hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 200 }} >
           <Link href="/posts" passHref>
-              <NavLink
+              <NavLink 
                 component="a"
                 label="Publicaciones"
-                icon={<IconHome2 size={16} stroke={1.5} />}
+                icon={<IconClipboardList size={30} stroke={1.5} />}
               />
             </Link>
 
@@ -50,7 +47,7 @@ const AppShellComponent = ({ children }) => {
               <NavLink
                 component="a"
                 label="Alumnos"
-                icon={<IconCheckupList size={16} stroke={1.5} />}
+                icon={<IconUser size={30} stroke={1.5} />}
               />
             </Link>
 
@@ -58,7 +55,7 @@ const AppShellComponent = ({ children }) => {
               <NavLink
                 component="a"
                 label="Grupos"
-                icon={<IconCalculator size={16} stroke={1.5} />}
+                icon={<IconUsers size={30} stroke={1.5} />}
               />
             </Link>
 
