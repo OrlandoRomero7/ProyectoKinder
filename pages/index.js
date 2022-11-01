@@ -1,9 +1,14 @@
+import { Text } from '@mantine/core'
+import Link from 'next/link'
 import React from 'react'
 import { Login } from '../components/Login'
 
 const index = () => {
   return (
-    <Login></Login>
+    <>
+    <Login/>
+    <Link href='teachers'><Text>Login</Text></Link>
+    </>
   )
 }
 

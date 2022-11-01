@@ -1,5 +1,25 @@
 .nav__links{
+    padding-top: 1rem;
+    justify-content: center;
     align-items: center;
-    display: flex;
-    background-color: red;
+    text-align: center;
+}
+.nav__bar{
+    background-color: #02406F;
+    position:static;
+    height: auto;
+}
+.nav__text{
+    color: white;
+}
+.header__main{
+    padding-left: 25vh;
+}
+@media screen and (max-width: 720px) {
+    .nav__bar{
+        position: fixed;
+    }
+    .header__main{
+        padding-left: 1rem;
+    }
 }

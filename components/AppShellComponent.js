@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from '../styles/AppShell.module.css'
+import { FaChalkboardTeacher, FaClipboardList, FaUser, FaUsers } from 'react-icons/fa';
+
 import {
   AppShell,
   Navbar,
@@ -9,6 +11,10 @@ import {
   Header,
   Burger,
   NavLink,
+  Center,
+  Stack,
+  ThemeIcon,
+  Image,
 } from "@mantine/core";
 import {
   IconCheckupList,
@@ -19,11 +25,12 @@ import {
 } from "@tabler/icons";
 import Link from "next/link";
 
+
 const AppShellComponent = ({ children }) => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   return (
-    <AppShell
+    <AppShell 
       styles={{
         main: {
           background:
@@ -34,42 +41,46 @@ const AppShellComponent = ({ children }) => {
       }}
       navbarOffsetBreakpoint="sm"
       navbar={
-        <Navbar p="md"  hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 200 }} >
-          <Link href="/posts" passHref>
-              <NavLink 
-                component="a"
-                label="Publicaciones"
-                icon={<IconClipboardList size={30} stroke={1.5} />}
-              />
-            </Link>
+        
+        <Navbar className={styles.nav__bar} p="md"  hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 150, lg: 200 }} >
+          
+          <Center>
+            <Stack>
+              <Link href='posts'>
+              <div className={styles.nav__links}>
+              <FaClipboardList color="white" size="2em"/>
+              <Text className={styles.nav__text}>Publicaciones</Text>
+              </div>
+              </Link>
 
-            <Link href="/students" passHref>
-              <NavLink
-                component="a"
-                label="Alumnos"
-                icon={<IconUser size={30} stroke={1.5} />}
-              />
-            </Link>
+              <Link href="students">
+              <div className={styles.nav__links}>
+              <FaUser color="white" size="2em"/>
+              <Text className={styles.nav__text}>Alumnos</Text>
+              </div>
+              </Link>
 
-            <Link href="/groups" passHref>
-              <NavLink
-                component="a"
-                label="Grupos"
-                icon={<IconUsers size={30} stroke={1.5} />}
-              />
-            </Link>
+              <Link href="groups">
+              <div className={styles.nav__links}>
+              <FaChalkboardTeacher color="white" size="2em"/>
+              <Text className={styles.nav__text}>Grupos</Text>
+              </div>
+              </Link>
 
-            <Link href="/teachers" passHref>
-              <NavLink
-                component="a"
-                label="Personal"
-                icon={<IconSearch size={16} stroke={1.5} />}
-              />
-            </Link>
+              <Link href="teachers">
+              <div className={styles.nav__links}>
+              <FaUsers color="white" size="2em"/>
+              <Text className={styles.nav__text}>Personal</Text>
+
+              </div>
+              </Link>
+          </Stack>
+          </Center>
         </Navbar>
+        
       }
       header={
-        <Header height={70} p="md">
+        <Header className={styles.header__main}height={80} p="md" pl={60}>
           <div
             style={{ display: "flex", alignItems: "center", height: "100%" }}
           >
@@ -82,6 +93,7 @@ const AppShellComponent = ({ children }) => {
                 mr="xl"
               />
             </MediaQuery>
+            <Image width={180}src="/assets/img/aidalogo.png"></Image>
 
             
           </div>
