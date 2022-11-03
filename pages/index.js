@@ -7,7 +7,6 @@ const index = () => {
   return (
     <>
     <Login/>
-    <Link href='teachers'><Text>Login</Text></Link>
     </>
   )
 }

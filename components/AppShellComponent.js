@@ -42,34 +42,34 @@ const AppShellComponent = ({ children }) => {
       navbarOffsetBreakpoint="sm"
       navbar={
         
-        <Navbar className={styles.nav__bar} p="md"  hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 150, lg: 200 }} >
+        <Navbar className={styles.nav__bar} p="md"  hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 150, lg: 125 }} >
           
           <Center>
             <Stack>
               <Link href='posts'>
               <div className={styles.nav__links}>
-              <FaClipboardList color="white" size="2em"/>
+              <FaClipboardList color="white" size="3em"/>
               <Text className={styles.nav__text}>Publicaciones</Text>
               </div>
               </Link>
 
               <Link href="students">
               <div className={styles.nav__links}>
-              <FaUser color="white" size="2em"/>
+              <FaUser color="white" size="3em"/>
               <Text className={styles.nav__text}>Alumnos</Text>
               </div>
               </Link>
 
               <Link href="groups">
               <div className={styles.nav__links}>
-              <FaChalkboardTeacher color="white" size="2em"/>
+              <FaChalkboardTeacher color="white" size="3em"/>
               <Text className={styles.nav__text}>Grupos</Text>
               </div>
               </Link>
 
               <Link href="teachers">
               <div className={styles.nav__links}>
-              <FaUsers color="white" size="2em"/>
+              <FaUsers color="white" size="3em"/>
               <Text className={styles.nav__text}>Personal</Text>
 
               </div>

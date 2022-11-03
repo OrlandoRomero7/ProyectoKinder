@@ -1,0 +1,39 @@
+.image{
+    margin: 0 auto;
+    padding-bottom: 3vh;
+}
+.inputs{
+    width: auto;
+    margin: 0 auto;
+}
+.login__container{
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.down{
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    flex-direction: column;
+    padding-top: 2rem;
+    display: flex;
+    
+}
+.recover{
+    text-decoration: underline;
+    padding-top: 2rem;
+    font-size: 1.5rem;
+
+}
+.login__button{
+    background-color: #02477B;
+    width: 100%;
+}
+.login__button:hover{
+    background-color: #02477ba6;
+    width: 100%;
+}
