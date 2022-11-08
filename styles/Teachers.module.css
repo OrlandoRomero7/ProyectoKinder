@@ -1,0 +1,13 @@
+.post__icon{
+    background-color: #235E8B;
+    width: 2.3vw;
+    float: right;
+    margin-right: 10vw;
+}
+.modal{
+    font-size: 1.7rem;
+}
+.post__button{
+    background-color: #235E8B;
+    width: 100%;
+}
