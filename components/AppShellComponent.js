@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from '../styles/AppShell.module.css'
-import { FaChalkboardTeacher, FaClipboardList, FaUser, FaUsers } from 'react-icons/fa';
-
+import { FaChalkboardTeacher, FaClipboardList, FaUser, FaUsers, FaSignOutAlt} from 'react-icons/fa';
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebaseConfig';
 import {
   AppShell,
   Navbar,
@@ -24,6 +25,20 @@ import {
   IconUser,
 } from "@tabler/icons";
 import Link from "next/link";
+
+const signOutUser = async () => {  
+  return signOut(auth).then(() => { 
+      return {
+          suscess: true
+      }
+    }).catch((error) => { 
+      return {
+        error
+      }
+    })
+
+}
+
 
 
 const AppShellComponent = ({ children }) => {
@@ -71,9 +86,20 @@ const AppShellComponent = ({ children }) => {
               <div className={styles.nav__links}>
               <FaUsers color="white" size="3em"/>
               <Text className={styles.nav__text}>Personal</Text>
-
               </div>
               </Link>
+              <div className={styles.nav__links}>
+              <a onClick={signOutUser}>
+              <FaSignOutAlt color="white" size="3em"/>
+              
+              <Text className={styles.nav__text}>Salir</Text>
+              
+              </a>
+              </div>
+              
+                
+
+              
           </Stack>
           </Center>
         </Navbar>

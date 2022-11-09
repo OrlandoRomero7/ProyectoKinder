@@ -1,7 +1,7 @@
 import React from 'react'
 import { Textarea, Button, Center } from '@mantine/core';
 import styles from '../styles/Teachers.module.css'
-import { DatePicker } from '@mantine/dates';
+//import { DatePicker } from '@mantine/dates';
 
 const ModalNewPost = () => {
   return (

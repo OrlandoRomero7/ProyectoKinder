@@ -5,9 +5,9 @@ import { Login } from '../components/Login'
 import styles from '../styles/Login.module.css'
 const index = () => {
   return (
-    <div className={styles.background}>
-      <Login />
-    </div>
+    <>
+    <Login/>
+    </>
   )
 }
 
