@@ -4,7 +4,7 @@ import styles from '../styles/Teachers.module.css'
 import { IconPlus } from '@tabler/icons';
 import { ActionIcon, Modal } from '@mantine/core';
 import { useState } from 'react';
-import ModalNewPost from '../components/ModalNewPost';
+import CreateTeacher from '../components/CreateTeacher';
 
 const Teachers = () => {
   const [opened, setOpened] = useState(false);
@@ -21,9 +21,9 @@ const Teachers = () => {
         className={styles.modal}
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Agregar Publicación"
+        title="Registro Personal"
       >
-        <ModalNewPost/>
+        <CreateTeacher/>
       </Modal>
     </Layout>
     
