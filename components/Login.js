@@ -11,9 +11,12 @@ import {
 import { useForm } from "@mantine/form";
 import styles from "../styles/Login.module.css";
 import Link from "next/link";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+import { signInWithEmailAndPassword,getAuth } from "firebase/auth";
+//import { auth } from "../firebaseConfig";
 import { useRouter } from "next/router";
+import firebaseApp from "../firebaseConfig";
+
+const auth = getAuth(firebaseApp);
 
 export const Login = () => {
   const [messageError, setMessageError] = useState("");

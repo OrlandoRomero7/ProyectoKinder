@@ -1,11 +1,19 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import React from 'react'
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../firebaseConfig';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from 'firebase/auth'
+//import { auth } from '../firebaseConfig';
 import Home from '../pages';
 import { LoadingOverlay } from '@mantine/core';
+import firebaseApp from "../firebaseConfig";
+import {getFirestore,doc,getDoc} from "firebase/firestore"
+
+const auth = getAuth(firebaseApp);
+
+const firestore = getFirestore(firebaseApp)
+
 
 const AuthContext = createContext({})
+
 export const AuthContextProvider = ({ children }: { children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -15,8 +23,10 @@ export const AuthContextProvider = ({ children }: { children }) => {
                 setUser({
                     uid: user.uid,
                     email: user.email,
-                    displayName: user.displayName
+                    
+                    //displayName: user.displayName
                 })
+                console.log(user.email)
             } else {
                 setUser(null)
             }

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import styles from '../styles/AppShell.module.css'
 import { FaChalkboardTeacher, FaClipboardList, FaUser, FaUsers, FaSignOutAlt} from 'react-icons/fa';
-import { signOut } from 'firebase/auth'
-import { auth } from '../firebaseConfig';
+import { signOut,getAuth } from 'firebase/auth'
+//import { auth } from '../firebaseConfig';
+import firebaseApp from "../firebaseConfig";
+
+const auth = getAuth(firebaseApp);
 import {
   AppShell,
   Navbar,

@@ -2,12 +2,18 @@ import React from 'react'
 import Layout from '../components/Layout'
 import styles from '../styles/Teachers.module.css'
 import { IconPlus } from '@tabler/icons';
-import { ActionIcon, Modal } from '@mantine/core';
+import { ActionIcon, Modal, Text } from '@mantine/core';
 import { useState } from 'react';
 import CreateTeacher from '../components/CreateTeacher';
+import { doc, getDoc } from "firebase/firestore";
+
+
+
 
 const Teachers = () => {
   const [opened, setOpened] = useState(false);
+
+  
 
   return (
     <Layout tituloPagina="Docentes">
@@ -15,7 +21,6 @@ const Teachers = () => {
       <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon}variant="filled"><IconPlus size={30} /></ActionIcon>
 
       </div>
-
 
       <Modal
         className={styles.modal}
@@ -25,6 +30,9 @@ const Teachers = () => {
       >
         <CreateTeacher/>
       </Modal>
+
+
+      
     </Layout>
     
   )
