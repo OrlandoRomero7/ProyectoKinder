@@ -60,7 +60,7 @@ const CreateTeacher = () => {
   });
   const registerUser = async () => {
     try {
-        await createUserWithEmailAndPassword(
+      const infoUsuario = await createUserWithEmailAndPassword(
         auth,
         form.values.email,
         form.values.password
@@ -68,7 +68,7 @@ const CreateTeacher = () => {
         return usuarioFirebase;
       }); 
      // console.log(infoUser.user.uid);
-      const docuRef = doc(firestore, `Users/${form.values.email}`);
+      const docuRef = doc(firestore, `Users/${infoUsuario.user.uid}`);
       form.values.group != ""
         ? setDoc(docuRef, {
             name: form.values.name,
