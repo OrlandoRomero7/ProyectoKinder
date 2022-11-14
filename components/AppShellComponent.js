@@ -4,8 +4,9 @@ import { FaChalkboardTeacher, FaClipboardList, FaUser, FaUsers, FaSignOutAlt} fr
 import { signOut,getAuth } from 'firebase/auth'
 //import { auth } from '../firebaseConfig';
 import firebaseApp from "../firebaseConfig";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
-const auth = getAuth(firebaseApp);
+
 import {
   AppShell,
   Navbar,
@@ -29,6 +30,12 @@ import {
 } from "@tabler/icons";
 import Link from "next/link";
 
+const auth = getAuth(firebaseApp);
+
+const firestore = getFirestore(firebaseApp);
+
+
+
 const signOutUser = async () => {  
   return signOut(auth).then(() => { 
       return {
@@ -40,11 +47,65 @@ const signOutUser = async () => {
       }
     })
 
-}
+} 
 
+
+
+
+const  mostrar = async () => {
+
+  const [datos, setDatos] = useState('');
+
+
+  
+
+  const firestore = getFirestore(firebaseApp);
+  const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
+  const docSnap = await getDoc(docuRef);
+
+  
+  
+
+  if (docSnap.exists()) {
+    setDatos(docSnap.data().role)
+    console.log(datos)
+    //return datos
+    //setDatos(docSnap.data());
+    //console.log("Document data:", docSnap.data().role);
+  } else {
+    // doc.data() will be undefined in this case
+    //console.log("No such document!");
+  }  
+
+
+}
+ 
 
 
 const AppShellComponent = ({ children }) => {
+
+  /* const [datos, setDatos] = useState('');
+
+  const  mostrar = async () => {
+    const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
+    const docSnap = await getDoc(docuRef);
+    if (docSnap.exists()) {
+      setDatos(docSnap.data().role)
+      //console.log(datos)
+      //setDatos(docSnap.data());
+      //console.log("Document data:", datos);
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }  
+  } */
+
+  mostrar()
+  
+  //console.log(datos)
+
+  
+
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   return (
@@ -77,6 +138,7 @@ const AppShellComponent = ({ children }) => {
               <Text className={styles.nav__text}>Alumnos</Text>
               </div>
               </Link>
+              
 
               <Link href="groups">
               <div className={styles.nav__links}>
@@ -123,6 +185,8 @@ const AppShellComponent = ({ children }) => {
               />
             </MediaQuery>
             <Image width={180}src="/assets/img/aidalogo.png"></Image>
+            <p>{auth.currentUser.uid}</p>
+            
 
             
           </div>

@@ -2,16 +2,47 @@ import React from 'react'
 import Layout from '../components/Layout'
 import styles from '../styles/Teachers.module.css'
 import { IconPlus } from '@tabler/icons';
-import { ActionIcon, Modal, Text } from '@mantine/core';
+import { ActionIcon, Button, Modal, Text } from '@mantine/core';
 import { useState } from 'react';
 import CreateTeacher from '../components/CreateTeacher';
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+
+
+import firebaseApp from "../firebaseConfig";
+
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { async } from '@firebase/util';
+const auth = getAuth(firebaseApp);
 
 
 
+
+
+
+const  mostrar = async () => {
+  const firestore = getFirestore(firebaseApp);
+  const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
+  const docSnap = await getDoc(docuRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+
+
+}
+
+
+  
 
 const Teachers = () => {
   const [opened, setOpened] = useState(false);
+
+  
+
+  
 
   
 
@@ -30,6 +61,17 @@ const Teachers = () => {
       >
         <CreateTeacher/>
       </Modal>
+
+      <p>{auth.currentUser.uid}</p>
+
+      <Button onClick={mostrar}>
+        Presiname
+      </Button>
+      
+
+      
+      
+      
 
 
       
