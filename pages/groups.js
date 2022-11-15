@@ -1,15 +1,14 @@
 import React,{useEffect}from 'react'
 import Layout from '../components/Layout'
-import styles from '../styles/Teachers.module.css'
-import { IconPlus } from '@tabler/icons';
-import { ActionIcon, Modal, Text, Table,Button} from '@mantine/core';
+import { IconEdit, IconPlus, IconTrash } from '@tabler/icons';
+import { ActionIcon, Modal, Text, Table,Button, Center} from '@mantine/core';
 import { useState } from 'react';
 import CreateGroup from '../components/CreateGroup';
-
+import styles from '../styles/Groups.module.css'
 import { getAllGroups } from '../firebase/getDataDB';
 import { deleteGroup } from '../firebase/setDataDB';
 import CreateGroupEdit from '../components/CreateGroupEdit';
-
+import { IconAdjustments } from '@tabler/icons';
 const Groups = () => {
   const [opened, setOpened] = useState(false);
   const [opened2, setOpened2] = useState(false);
@@ -30,7 +29,7 @@ const Groups = () => {
   return (
     <Layout tituloPagina="Grupos">
     <div className={styles.new__post}>
-    <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon}variant="filled"><IconPlus size={30} /></ActionIcon>
+      <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon}variant="filled"><IconPlus size={30} /></ActionIcon>
 
     </div>
 
@@ -56,8 +55,7 @@ const Groups = () => {
     </Modal>
 
     )}
-    
-
+    <div  className={styles.table__container}>
     <Table>
       <thead>
         <tr>
@@ -75,18 +73,21 @@ const Groups = () => {
             <td>{group.grade}</td>
             <td>{group.group}</td>
             <td>
-              <Button onClick={() => {setOpened2(true);setEditGroup(group)}}>Editar</Button>
-              <Button onClick={()=>{deleteGroup(group).then((confimacion)=>{
-                updateGroups()
-              })
-                }}>Eliminar</Button>
+              <div className={styles.icons}>
+            <ActionIcon color='indigo' onClick={() => {setOpened2(true);setEditGroup(group)}}>
+              <IconEdit size={18} />
+            </ActionIcon>
+            <ActionIcon color='red'onClick={()=>{deleteGroup(group).then((confimacion)=>{ updateGroups()}) }}>
+              <IconTrash size={18} />
+            </ActionIcon>
+            </div>
             </td>
 
           </tr>
         ))}
       </tbody>
     </Table>
-
+    </div>
     
 
 
