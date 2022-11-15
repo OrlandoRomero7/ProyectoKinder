@@ -1,25 +1,24 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Layout from '../components/Layout'
 import styles from '../styles/Teachers.module.css'
 import { IconPlus } from '@tabler/icons';
-import { ActionIcon, Button, Modal, Text } from '@mantine/core';
+import { ActionIcon, Button, Modal, Text,Table } from '@mantine/core';
 import { useState } from 'react';
 import CreateTeacher from '../components/CreateTeacher';
 import { doc, getDoc, getFirestore } from "firebase/firestore";
+import getAllUsers from '../firebase/getDataDB';
 
 
 import firebaseApp from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { async } from '@firebase/util';
+
 const auth = getAuth(firebaseApp);
 
 
 
-
-
-
-const  mostrar = async () => {
+/* const  mostrar = async () => {
   const firestore = getFirestore(firebaseApp);
   const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
   const docSnap = await getDoc(docuRef);
@@ -33,18 +32,25 @@ const  mostrar = async () => {
 
 
 }
+ */
 
 
   
 
 const Teachers = () => {
   const [opened, setOpened] = useState(false);
+  const [users, setUsers] = useState([]);
 
+  function updateUsers() {
+    getAllUsers().then((users) => {
+      setUsers(users);
+    });
+  }
   
+  useEffect(() => {
+    updateUsers();
+  }, []);
 
-  
-
-  
 
   return (
     <Layout tituloPagina="Docentes">
@@ -62,11 +68,39 @@ const Teachers = () => {
         <CreateTeacher/>
       </Modal>
 
-      <p>{auth.currentUser.uid}</p>
+      <br></br>
 
-      <Button onClick={mostrar}>
-        Presiname
-      </Button>
+      
+
+      <Table>
+      <thead>
+        <tr>
+          <th>Numero</th>
+          <th>Nombre</th>
+          <th>Rol</th>
+          <th>Correo</th>
+          <th>Grupo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+        
+      <tbody>
+        {users && users.map((user,index)=>(
+          <tr key={index}>
+            <td>{index + 1}</td>
+            <td>{user.name}</td>
+            <td>{user.role}</td>
+            <td>{user.email}</td>
+            <td>{user.group}</td>
+            <td>
+              <Button>Editar</Button>
+              <Button>Eliminar</Button>
+            </td>
+
+          </tr>
+        ))}
+      </tbody>
+    </Table>
       
 
       

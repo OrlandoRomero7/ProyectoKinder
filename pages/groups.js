@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../components/Layout'
 import styles from '../styles/Teachers.module.css'
 import { IconPlus } from '@tabler/icons';
-import { ActionIcon, Modal, Text } from '@mantine/core';
+import { ActionIcon, Modal, Text, Table } from '@mantine/core';
 import { useState } from 'react';
 import CreateGroup from '../components/CreateGroup';
 const Groups = () => {
@@ -23,6 +23,8 @@ const Groups = () => {
     >
       <CreateGroup/>
     </Modal>
+
+    
 
 
     
