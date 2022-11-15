@@ -4,7 +4,7 @@ import { getFirestore,collection, getDocs } from 'firebase/firestore'
 
 const db = getFirestore(firebaseApp);
 
-export default async function getAllUsers() {
+export async function getAllUsers() {
   const users = [];
   const collectionRef = collection(db, "Users");
   const snapshot = await getDocs(collectionRef);
@@ -13,3 +13,21 @@ export default async function getAllUsers() {
   });
   return users;
 }
+
+
+export async function getAllGroups() {
+  var i = 0;
+  const groups = [];
+  const collectionRef = collection(db, "Groups");
+  const snapshot = await getDocs(collectionRef);
+  snapshot.forEach((doc) => {
+    groups.push(doc.data());
+    groups[i]['uid']=doc.id;
+    i++
+    
+  });
+  console.log(groups)
+  
+  return groups;
+}
+

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {
   Button,
   Center,
@@ -14,12 +14,17 @@ import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import firebaseApp from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAllGroups } from '../firebase/getDataDB';
+
 const auth = getAuth(firebaseApp);
 
-const CreateTeacher = () => {
+const CreateTeacher = ({updateUsers}) => {
   const firestore = getFirestore(firebaseApp);
   const [messageError, setMessageError] = useState("");
 
+  const [groups, setGroups] = useState([]);
+
+  
   const form = useForm({
     initialValues: {
       name: "",
@@ -57,6 +62,17 @@ const CreateTeacher = () => {
   }, */
   
   });
+
+  function updateGroups() {
+    getAllGroups().then((groups) => {
+      setGroups(groups);
+    });
+  }
+  
+  useEffect(() => {
+    updateGroups();
+  }, []);
+
   const registerUser = async () => {
     try {
       const infoUsuario = await createUserWithEmailAndPassword(
@@ -80,6 +96,7 @@ const CreateTeacher = () => {
             role: form.values.role,
             email: form.values.email,
           });
+          updateUsers()
     } catch (error) {
       if (
         error == "FirebaseError: Firebase: Error (auth/email-already-in-use)."
@@ -108,12 +125,9 @@ const CreateTeacher = () => {
         <Select
           label="Asignar Grupo"
           {...form.getInputProps("group")}
-          data={[
-            { value: "1a", label: "1A" },
-            { value: "1b", label: "1B" },
-            { value: "2a", label: "2A" },
-            { value: "2c", label: "2C" },
-          ]}
+          data={groups.map((group) => {
+            return { value: group.uuid, label: group.grade + " " + group.group};
+          })}
         />
       )}
 

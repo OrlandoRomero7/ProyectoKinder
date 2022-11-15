@@ -14,11 +14,15 @@ import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import firebaseApp from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { addGroup } from "../firebase/setDataDB";
+
 const auth = getAuth(firebaseApp);
 
-const CreateGroup = () => {
+const CreateGroup = ({updateGroups}) => {
   const firestore = getFirestore(firebaseApp);
   const [messageError, setMessageError] = useState("");
+
+  
 
   const form = useForm({
     initialValues: {
@@ -28,8 +32,21 @@ const CreateGroup = () => {
 
     
   });
+
+  function addGroupModal(){
+    const grade = form.values.grade
+    const group = form.values.group
+
+    const dataGroup = {grade,group};
+    addGroup(dataGroup)
+
+    updateGroups()
+
+  }
+
+
   return (
-    <form onSubmit={form.onSubmit()}>
+    <form onSubmit={form.onSubmit(addGroupModal)}>
       <Select
         label="Grado"
         {...form.getInputProps("grade")}

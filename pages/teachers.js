@@ -6,7 +6,7 @@ import { ActionIcon, Button, Modal, Text,Table } from '@mantine/core';
 import { useState } from 'react';
 import CreateTeacher from '../components/CreateTeacher';
 import { doc, getDoc, getFirestore } from "firebase/firestore";
-import getAllUsers from '../firebase/getDataDB';
+import { getAllUsers } from '../firebase/getDataDB';
 
 
 import firebaseApp from "../firebaseConfig";
@@ -65,7 +65,7 @@ const Teachers = () => {
         onClose={() => setOpened(false)}
         title="Registro Personal"
       >
-        <CreateTeacher/>
+        <CreateTeacher updateUsers={updateUsers}/>
       </Modal>
 
       <br></br>
