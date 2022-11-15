@@ -8,10 +8,13 @@ import CreateGroup from '../components/CreateGroup';
 
 import { getAllGroups } from '../firebase/getDataDB';
 import { deleteGroup } from '../firebase/setDataDB';
+import CreateGroupEdit from '../components/CreateGroupEdit';
 
 const Groups = () => {
   const [opened, setOpened] = useState(false);
+  const [opened2, setOpened2] = useState(false);
   const [groups, setGroups] = useState([]);
+  const [editGroup, setEditGroup] = useState({});
 
   function updateGroups() {
     getAllGroups().then((groups) => {
@@ -41,6 +44,20 @@ const Groups = () => {
       <CreateGroup updateGroups={updateGroups}/>
     </Modal>
 
+    {editGroup && (
+      <Modal
+      className={styles.modal}
+      opened={opened2}
+      onClose={() => setOpened2(false)}
+      title="Editar Grupo"
+      
+    >
+      <CreateGroupEdit updateGroups={updateGroups} editGroup={editGroup}/>
+    </Modal>
+
+    )}
+    
+
     <Table>
       <thead>
         <tr>
@@ -58,7 +75,7 @@ const Groups = () => {
             <td>{group.grade}</td>
             <td>{group.group}</td>
             <td>
-              <Button >Editar</Button>
+              <Button onClick={() => {setOpened2(true);setEditGroup(group)}}>Editar</Button>
               <Button onClick={()=>{deleteGroup(group).then((confimacion)=>{
                 updateGroups()
               })
