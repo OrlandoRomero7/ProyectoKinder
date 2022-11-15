@@ -1,11 +1,9 @@
 import React,{useState} from "react";
 import {
-  Textarea,
   Button,
   Center,
   Select,
   TextInput,
-  PasswordInput,
   Paper,
   Text,
 } from "@mantine/core";
@@ -57,6 +55,7 @@ const CreateTeacher = () => {
           : null,
     
   }, */
+  
   });
   const registerUser = async () => {
     try {
