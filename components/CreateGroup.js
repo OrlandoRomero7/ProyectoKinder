@@ -12,7 +12,6 @@ import { useForm } from "@mantine/form";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 //import { auth } from "../firebaseConfig";
 import firebaseApp from "../firebaseConfig";
-
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { addGroup } from "../firebase/setDataDB";
 import { getAllGroups } from '../firebase/getDataDB';
@@ -25,7 +24,9 @@ const CreateGroup = ({updateGroups}) => {
   const [groups, setGroups] = useState([]);
 
   
-
+  const groupCheck = () => {
+    alert('Grupo Creado')
+  }
   const form = useForm({
     initialValues: {
       grade: "",
@@ -55,10 +56,11 @@ const CreateGroup = ({updateGroups}) => {
     updateGroups()
 
   }
-
-
+ 
   return (
-    <form onSubmit={form.onSubmit(()=>{getGroups();addGroupModal()})}>
+    <form onSubmit={form.onSubmit(()=>{getGroups();addGroupModal();
+    
+      groupCheck()})}>
       <Select
         label="Grado"
         {...form.getInputProps("grade")}
@@ -78,8 +80,6 @@ const CreateGroup = ({updateGroups}) => {
             { value: "C", label: "C" }
           ]}
         />
-
-      
       <Center pt={15}>
         <Button className={styles.post__button} type="submit">
           {" "}
