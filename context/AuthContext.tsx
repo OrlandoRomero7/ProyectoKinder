@@ -26,7 +26,7 @@ export const AuthContextProvider = ({ children }: { children }) => {
                     
                     //displayName: user.displayName
                 })
-                console.log(user.email)
+                //console.log(user.email)
             } else {
                 setUser(null)
             }

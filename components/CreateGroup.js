@@ -15,12 +15,14 @@ import firebaseApp from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { addGroup } from "../firebase/setDataDB";
+import { getAllGroups } from '../firebase/getDataDB';
 
 const auth = getAuth(firebaseApp);
 
 const CreateGroup = ({updateGroups}) => {
   const firestore = getFirestore(firebaseApp);
   const [messageError, setMessageError] = useState("");
+  const [groups, setGroups] = useState([]);
 
   
 
@@ -29,9 +31,19 @@ const CreateGroup = ({updateGroups}) => {
       grade: "",
       group: "",
     },
+    validate:{
+      grade: (value) => (value=="" ? 'Elige una opción' : null),
+      group: (value) => (value=="" ? 'Elige una opción' : null),
+    },
 
     
   });
+
+  function getGroups() {
+    getAllGroups().then((groups) => {
+      setGroups(groups);
+    });
+  }
 
   function addGroupModal(){
     const grade = form.values.grade
@@ -46,7 +58,7 @@ const CreateGroup = ({updateGroups}) => {
 
 
   return (
-    <form onSubmit={form.onSubmit(addGroupModal)}>
+    <form onSubmit={form.onSubmit(()=>{getGroups();addGroupModal()})}>
       <Select
         label="Grado"
         {...form.getInputProps("grade")}
@@ -61,9 +73,9 @@ const CreateGroup = ({updateGroups}) => {
           label="Grupo"
           {...form.getInputProps("group")}
           data={[
-            { value: "a", label: "A" },
-            { value: "b", label: "B" },
-            { value: "a", label: "C" }
+            { value: "A", label: "A" },
+            { value: "B", label: "B" },
+            { value: "C", label: "C" }
           ]}
         />
 

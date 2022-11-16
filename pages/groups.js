@@ -59,7 +59,6 @@ const Groups = () => {
     <Table>
       <thead>
         <tr>
-          <th>Numero</th>
           <th>Grado</th>
           <th>Grupo</th>
           <th>Acción</th>
@@ -67,9 +66,8 @@ const Groups = () => {
       </thead>
         
       <tbody>
-        {groups && groups.map((group,index)=>(
-          <tr key={index}>
-            <td>{index + 1}</td>
+        {groups && groups.map((group)=>(
+          <tr>
             <td>{group.grade}</td>
             <td>{group.group}</td>
             <td>

@@ -63,9 +63,9 @@ const CreateGroupEdit = ({updateGroups,editGroup}) => {
           defaultValue={editGroup.group}
           {...form.getInputProps("group")}
           data={[
-            { value: "a", label: "A" },
-            { value: "b", label: "B" },
-            { value: "a", label: "C" }
+            { value: "A", label: "A" },
+            { value: "B", label: "B" },
+            { value: "C", label: "C" }
           ]}
         />
 

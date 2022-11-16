@@ -14,6 +14,8 @@ import firebaseApp from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { async } from '@firebase/util';
 
+import { deleteUserAuth } from '../firebase/setDataDB';
+
 const auth = getAuth(firebaseApp);
 
 
@@ -91,10 +93,10 @@ const Teachers = () => {
             <td>{user.name}</td>
             <td>{user.role}</td>
             <td>{user.email}</td>
-            <td>{user.group}</td>
+            <td>{user.group==null? "N/A" : user.group}</td>
             <td>
               <Button>Editar</Button>
-              <Button>Eliminar</Button>
+              <Button onClick={()=>updateUsers()}>Eliminar</Button>
             </td>
 
           </tr>

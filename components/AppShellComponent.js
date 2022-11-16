@@ -52,21 +52,21 @@ const signOutUser = async () => {
 
 
 
-const  mostrar = async () => {
+/* const  mostrar = async () => {
 
   const [datos, setDatos] = useState('');
 
 
   
 
-  const firestore = getFirestore(firebaseApp);
+   const firestore = getFirestore(firebaseApp);
   const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
   const docSnap = await getDoc(docuRef);
 
   
   
 
-  if (docSnap.exists()) {
+ if (docSnap.exists()) {
     setDatos(docSnap.data().role)
     console.log(datos)
     //return datos
@@ -76,10 +76,10 @@ const  mostrar = async () => {
     // doc.data() will be undefined in this case
     //console.log("No such document!");
   }  
-
+ 
 
 }
- 
+   */
 
 
 const AppShellComponent = ({ children }) => {
@@ -100,7 +100,7 @@ const AppShellComponent = ({ children }) => {
     }  
   } */
 
-  mostrar()
+
   
   //console.log(datos)
 
@@ -185,7 +185,7 @@ const AppShellComponent = ({ children }) => {
               />
             </MediaQuery>
             <Image width={180}src="/assets/img/aidalogo.png"></Image>
-            <p>{auth.currentUser.uid}</p>
+           
             
 
             
