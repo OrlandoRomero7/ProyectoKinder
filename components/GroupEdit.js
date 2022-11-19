@@ -16,9 +16,10 @@ import firebaseApp from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { addGroup } from "../firebase/setDataDB";
 
+
 const auth = getAuth(firebaseApp);
 
-const CreateGroupEdit = ({updateGroups,editGroup}) => {
+const GroupEdit = ({updateGroups,editGroup}) => {
   const firestore = getFirestore(firebaseApp);
   const [messageError, setMessageError] = useState("");
 
@@ -80,4 +81,4 @@ const CreateGroupEdit = ({updateGroups,editGroup}) => {
   );  
 };
 
-export default CreateGroupEdit;
+export default GroupEdit;

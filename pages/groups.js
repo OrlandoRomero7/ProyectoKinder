@@ -7,9 +7,9 @@ import CreateGroup from '../components/CreateGroup';
 import styles from '../styles/Groups.module.css'
 import { getAllGroups } from '../firebase/getDataDB';
 import { deleteGroup } from '../firebase/setDataDB';
-import CreateGroupEdit from '../components/CreateGroupEdit';
+import GroupEdit from '../components/GroupEdit';
 import { IconAdjustments } from '@tabler/icons';
-import { openConfirmModal } from '@mantine/modals';
+//import { openConfirmModal } from '@mantine/modals';
 
 
 const Groups = () => {
@@ -60,7 +60,7 @@ const Groups = () => {
       title="Editar Grupo"
       
     >
-      <CreateGroupEdit updateGroups={updateGroups} editGroup={editGroup}/>
+      <GroupEdit updateGroups={updateGroups} editGroup={editGroup}/>
     </Modal>
 
     )}
@@ -75,8 +75,8 @@ const Groups = () => {
       </thead>
         
       <tbody>
-        {groups && groups.map((group)=>(
-          <tr>
+        {groups && groups.map((group,index)=>(
+          <tr key={index}>
             <td>{group.grade}</td>
             <td>{group.group}</td>
             <td>

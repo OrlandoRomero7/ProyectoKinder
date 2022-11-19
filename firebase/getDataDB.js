@@ -34,3 +34,19 @@ export async function getAllGroups() {
   return groups;
 }
 
+export async function getAllPosts() {
+  var i = 0;
+  const posts = [];
+  const collectionRef = collection(db, "Posts");
+  const snapshot = await getDocs(collectionRef);
+  snapshot.forEach((doc) => {
+    posts.push(doc.data());
+    posts[i]['uid']=doc.id;
+    i++
+    
+  });
+  //console.log(groups)
+  
+  return posts;
+}
+

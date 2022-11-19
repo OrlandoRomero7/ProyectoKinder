@@ -35,7 +35,7 @@ const CreateTeacher = ({updateUsers}) => {
       confirmPassword: "",
     },
 
-    validate: {
+    /* validate: {
       name: (value) =>
         value.length===0
           ? "Escriba un nombre"
@@ -56,7 +56,7 @@ const CreateTeacher = ({updateUsers}) => {
           ? "Las contraseñas no coinciden"
           : null,
     
-  }, 
+  },  */
   
   });
 

@@ -19,6 +19,19 @@ export async function addGroup(dataGroup) {
     setDoc(docRef, dataGroup);
 }
 
+export async function addPost(dataPost) {
+    
+  const collectionRef = collection(db, "Posts");
+  const docRef = doc(collectionRef);
+  setDoc(docRef, dataPost);
+}
+export async function editPostDB(dataPost) {
+    
+  const collectionRef = collection(db, "Posts");
+  const docRef = doc(collectionRef,dataPost.uid);
+  setDoc(docRef, dataPost);
+}
+
 
 export async function deleteGroup(group) {
     
@@ -29,31 +42,39 @@ export async function deleteGroup(group) {
     
   }
 
+  export async function deletePost(post) {
+    
+    const coleccionRef = collection(db, "Posts");
+    const docuRef = doc(coleccionRef, post.uid);
+    const removed = await deleteDoc(docuRef);
+    return removed 
+    
+  }
 
 
 
 
 
-export function deleteUserAuth(user){
+
+/* export function deleteUserAuth(user){
     deleteUser(user.uid).then(() => {
-        /* const coleccionRef = collection(db, "Users");
+        const coleccionRef = collection(db, "Users");
         const docuRef = doc(coleccionRef, user.uid);
-        deleteDoc(docuRef);  */
+        deleteDoc(docuRef);  
         console.log("Usuario eliminado")
       }).catch((error) => {
         console.log(error)
       }); 
 }
+ */
 
-
-/* export async function deleteUserDB(user){
+export async function deleteUserDB(user){
     const coleccionRef = collection(db, "Users");
     const docuRef = doc(coleccionRef, user.uid);
     const removed = await deleteDoc(docuRef);
     return removed 
 
-} */
-
+} 
 
 
 
