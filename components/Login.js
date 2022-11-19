@@ -83,7 +83,7 @@ export const Login = () => {
           />
           {messageError != "" && (
             <Paper>
-              <Text color="red">{messageError}</Text>
+              <Text size={14} color="red">{messageError}</Text>
             </Paper>
           )}
 
