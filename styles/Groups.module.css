@@ -18,3 +18,8 @@
 .icons{
     display: flex;
 }
+.modal__confirmation{
+    float: right;
+    display: flex;
+    gap: 1vw
+}

@@ -29,6 +29,10 @@ const CreateGroup = ({updateGroups}) => {
       grade: "",
       group: "",
     },
+    validate:{
+      grade: (value) => (value==""?'Elige una opcion' : null),
+      group: (value) => (value==""?'Elige una opcion' : null)
+    }
 
     
   });
@@ -61,9 +65,9 @@ const CreateGroup = ({updateGroups}) => {
           label="Grupo"
           {...form.getInputProps("group")}
           data={[
-            { value: "a", label: "A" },
-            { value: "b", label: "B" },
-            { value: "a", label: "C" }
+            { value: "A", label: "A" },
+            { value: "B", label: "B" },
+            { value: "C", label: "C" }
           ]}
         />
 

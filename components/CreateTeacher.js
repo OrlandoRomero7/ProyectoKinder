@@ -84,17 +84,17 @@ const CreateTeacher = ({updateUsers}) => {
       }); 
      // console.log(infoUser.user.uid);
       const docuRef = doc(firestore, `Users/${infoUsuario.user.uid}`);
-      form.values.group != ""
+      form.values.group === ""
         ? setDoc(docuRef, {
             name: form.values.name,
             role: form.values.role,
             email: form.values.email,
-            group: form.values.group,
           })
         : setDoc(docuRef, {
             name: form.values.name,
             role: form.values.role,
             email: form.values.email,
+            group: form.values.group,
           });
           updateUsers()
     } catch (error) {
@@ -112,7 +112,7 @@ const CreateTeacher = ({updateUsers}) => {
 
   return (
     <form onSubmit={form.onSubmit(registerUser)}>
-      <TextInput autosize label="Nombre: " {...form.getInputProps("name")} />
+      <TextInput autosize={true} label="Nombre: " {...form.getInputProps("name")} />
       <Select
         label="Tipo de Usuario"
         {...form.getInputProps("role")}

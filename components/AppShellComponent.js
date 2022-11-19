@@ -185,7 +185,6 @@ const AppShellComponent = ({ children }) => {
               />
             </MediaQuery>
             <Image width={180}src="/assets/img/aidalogo.png"></Image>
-            <p>{auth.currentUser.uid}</p>
             
 
             

@@ -48,11 +48,11 @@ const CreateGroupEdit = ({updateGroups,editGroup}) => {
   return (
     <form onSubmit={form.onSubmit(editGroupModal)}>
       <Select
+        defaultValue="uno"  
         label="Grado"
         {...form.getInputProps("grade")}
-        defaultValue={editGroup.grade}
         data={[
-          { value: "1", label: "1" },
+          { value: 'uno', label: "1" },
           { value: "2", label: "2" },
           { value: "3", label: "3" }
           
