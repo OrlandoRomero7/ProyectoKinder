@@ -1,7 +1,6 @@
 import firebaseApp from '../firebaseConfig'
 import { getFirestore,collection, getDocs,doc,setDoc,deleteDoc} from 'firebase/firestore'
-
-
+import {  deleteUser,getAuth } from "firebase/auth";
 
 const db = getFirestore(firebaseApp);
 
@@ -29,5 +28,32 @@ export async function deleteGroup(group) {
     return removed 
     
   }
+
+
+
+
+
+
+export function deleteUserAuth(user){
+    deleteUser(user.uid).then(() => {
+        /* const coleccionRef = collection(db, "Users");
+        const docuRef = doc(coleccionRef, user.uid);
+        deleteDoc(docuRef);  */
+        console.log("Usuario eliminado")
+      }).catch((error) => {
+        console.log(error)
+      }); 
+}
+
+
+/* export async function deleteUserDB(user){
+    const coleccionRef = collection(db, "Users");
+    const docuRef = doc(coleccionRef, user.uid);
+    const removed = await deleteDoc(docuRef);
+    return removed 
+
+} */
+
+
 
 

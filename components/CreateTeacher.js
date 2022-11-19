@@ -35,15 +35,12 @@ const CreateTeacher = ({updateUsers}) => {
       confirmPassword: "",
     },
 
-    /* validate: {
+    validate: {
       name: (value) =>
         value.length===0
           ? "Escriba un nombre"
           : null,
-          name: (value) =>
-          value.length===0
-            ? "Escriba un nombre"
-            : null,
+      role: (value) => value.length==0? "Eliga una opción":null,
       email: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Esto no es un correo",
       password: (value) =>
@@ -59,20 +56,22 @@ const CreateTeacher = ({updateUsers}) => {
           ? "Las contraseñas no coinciden"
           : null,
     
-  }, */
+  }, 
   
   });
 
-  function updateGroups() {
+   function updateGroups() {
     getAllGroups().then((groups) => {
       setGroups(groups);
     });
   }
+  //console.log(groups)
   
-  useEffect(() => {
+/*   useEffect(() => {
     updateGroups();
-  }, []);
-
+  }, []);   
+ */
+  //console.log(groups)
   const registerUser = async () => {
     try {
       const infoUsuario = await createUserWithEmailAndPassword(
@@ -123,12 +122,18 @@ const CreateTeacher = ({updateUsers}) => {
       />
       {form.values.role === "profesor" && (
         <Select
+          onClick={()=>updateGroups()}
           label="Asignar Grupo"
-          {...form.getInputProps("group")}
           data={groups.map((group) => {
-            return { value: group.uuid, label: group.grade + " " + group.group};
+            return { value: group.grade+group.group, label: group.grade + "-" + group.group};
           })}
+          
+          {...form.getInputProps("group")}
+          //data={groups.map((group) => {
+            //return { value: group.uid, label: group.grade + " " + group.group};
+          //})}
         />
+        
       )}
 
       <TextInput autosize label="Correo: " {...form.getInputProps("email")} />
