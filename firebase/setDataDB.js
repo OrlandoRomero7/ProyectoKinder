@@ -37,6 +37,12 @@ export async function addGroup(dataGroup) {
     const docRef = doc(collectionRef);
     setDoc(docRef, dataGroup);
 }
+export async function editGroupDB(dataGroup) {
+    
+  const collectionRef = collection(db, "Groups");
+  const docRef = doc(collectionRef,dataGroup.uid);
+  setDoc(docRef, dataGroup);
+}
 export async function deleteGroup(group) {
     
   const coleccionRef = collection(db, "Groups");

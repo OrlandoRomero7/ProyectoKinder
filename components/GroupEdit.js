@@ -14,7 +14,7 @@ import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import firebaseApp from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { addGroup } from "../firebase/setDataDB";
+import {editGroupDB } from "../firebase/setDataDB";
 
 
 const auth = getAuth(firebaseApp);
@@ -35,12 +35,10 @@ const EditGroup = ({updateGroups,editGroup}) => {
 
   function editGroupModal(){
     const group = form.values.group
-    const dataGroup = {group}
-    addGroup(dataGroup)
+    const uid = editGroup.uid
+    const dataGroup = {group,uid}
+    editGroupDB(dataGroup).then(updateGroups())
 
-    updateGroups()
-
-    updateGroups()
 
   }
 
@@ -68,7 +66,7 @@ const EditGroup = ({updateGroups,editGroup}) => {
       <Center pt={15}>
         <Button className={styles.post__button} type="submit">
           {" "}
-          Registrar{" "}
+          Editar{" "}
         </Button>
       </Center>
     </form>
