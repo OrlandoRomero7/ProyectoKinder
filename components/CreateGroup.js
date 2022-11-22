@@ -37,7 +37,8 @@ const CreateGroup = ({updateGroups}) => {
 
   function addGroupModal(){
     const group = form.values.group
-    const dataGroup = {group}
+    const asignado = false
+    const dataGroup = {group, asignado}
     addGroup(dataGroup)
 
     updateGroups()
