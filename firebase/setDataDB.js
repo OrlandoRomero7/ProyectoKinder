@@ -10,13 +10,40 @@ export async function addUser() {
     const docRef = doc(collectionRef);
     setDoc(docRef);
 }
-
+export async function addStudent(dataStudent) {
+    
+  const collectionRef = collection(db, "Students");
+  const docRef = doc(collectionRef);
+  setDoc(docRef, dataStudent);
+}
+export async function editStudentDB(dataStudent) {
+    
+  const collectionRef = collection(db, "Students");
+  const docRef = doc(collectionRef,dataPost.uid);
+  setDoc(docRef, dataStudent);
+}
+export async function deleteStudent(student) {
+    
+  const coleccionRef = collection(db, "Students");
+  const docuRef = doc(coleccionRef, student.uid);
+  const removed = await deleteDoc(docuRef);
+  return removed 
+  
+}
 
 export async function addGroup(dataGroup) {
     
     const collectionRef = collection(db, "Groups");
     const docRef = doc(collectionRef);
     setDoc(docRef, dataGroup);
+}
+export async function deleteGroup(group) {
+    
+  const coleccionRef = collection(db, "Groups");
+  const docuRef = doc(coleccionRef, group.uid);
+  const removed = await deleteDoc(docuRef);
+  return removed 
+  
 }
 
 export async function addPost(dataPost) {
@@ -31,16 +58,6 @@ export async function editPostDB(dataPost) {
   const docRef = doc(collectionRef,dataPost.uid);
   setDoc(docRef, dataPost);
 }
-
-
-export async function deleteGroup(group) {
-    
-    const coleccionRef = collection(db, "Groups");
-    const docuRef = doc(coleccionRef, group.uid);
-    const removed = await deleteDoc(docuRef);
-    return removed 
-    
-  }
 
   export async function deletePost(post) {
     

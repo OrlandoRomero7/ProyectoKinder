@@ -125,7 +125,7 @@ const CreateTeacher = ({updateUsers}) => {
           onClick={()=>updateGroups()}
           label="Asignar Grupo"
           data={groups.map((group) => {
-            return { value: group.grade+group.group, label: group.grade + "-" + group.group};
+            return { value: group.group, label: group.group};
           })}
           
           {...form.getInputProps("group")}

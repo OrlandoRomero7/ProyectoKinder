@@ -7,8 +7,8 @@ import CreateGroup from '../components/CreateGroup';
 import styles from '../styles/Groups.module.css'
 import { getAllGroups } from '../firebase/getDataDB';
 import { deleteGroup } from '../firebase/setDataDB';
-import GroupEdit from '../components/GroupEdit';
 import { IconAdjustments } from '@tabler/icons';
+import GroupEdit from '../components/GroupEdit';
 //import { openConfirmModal } from '@mantine/modals';
 
 
@@ -68,8 +68,7 @@ const Groups = () => {
     <Table>
       <thead>
         <tr>
-          <th>Grado</th>
-          <th>Grupo</th>
+          <th>Grado y Grupo</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -77,7 +76,6 @@ const Groups = () => {
       <tbody>
         {groups && groups.map((group,index)=>(
           <tr key={index}>
-            <td>{group.grade}</td>
             <td>{group.group}</td>
             <td>
               <div className={styles.icons}>

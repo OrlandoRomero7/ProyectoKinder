@@ -4,6 +4,7 @@ import { getFirestore,collection, getDocs } from 'firebase/firestore'
 
 const db = getFirestore(firebaseApp);
 
+//obtiene todos el personal ADMIN y DOCENTE
 export async function getAllUsers() {
   var i = 0;
   const users = [];
@@ -17,6 +18,18 @@ export async function getAllUsers() {
   return users;
 }
 
+export async function getAllStudents() {
+  var i = 0;
+  const students= [];
+  const collectionRef = collection(db, "Students");
+  const snapshot = await getDocs(collectionRef);
+  snapshot.forEach((doc) => {
+    students.push(doc.data());
+    students[i]['uid']=doc.id;
+    i++
+  });
+  return students;
+}
 
 export async function getAllGroups() {
   var i = 0;

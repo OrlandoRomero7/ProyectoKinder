@@ -26,11 +26,9 @@ const CreateGroup = ({updateGroups}) => {
 
   const form = useForm({
     initialValues: {
-      grade: "",
       group: "",
     },
     validate:{
-      grade: (value) => (value==""?'Elige una opcion' : null),
       group: (value) => (value==""?'Elige una opcion' : null)
     }
 
@@ -38,10 +36,8 @@ const CreateGroup = ({updateGroups}) => {
   });
 
   function addGroupModal(){
-    const grade = form.values.grade
     const group = form.values.group
-
-    const dataGroup = {grade,group};
+    const dataGroup = {group}
     addGroup(dataGroup)
 
     updateGroups()
@@ -52,24 +48,22 @@ const CreateGroup = ({updateGroups}) => {
   return (
     <form onSubmit={form.onSubmit(addGroupModal)}>
       <Select
-        label="Grado"
-        {...form.getInputProps("grade")}
+        label="Grado y Grupo"
+        {...form.getInputProps("group")}
         data={[
-          { value: "1", label: "1" },
-          { value: "2", label: "2" },
-          { value: "3", label: "3" }
+          { value: "1-A", label: "1-A" },
+          { value: "1-B", label: "1-B" },
+          { value: "1-C", label: "1-C" },
+          { value: "2-A", label: "2-A" },
+          { value: "2-B", label: "2-B" },
+          { value: "2-C", label: "2-C" },
+          { value: "3-A", label: "3-A" },
+          { value: "3-B", label: "3-B" },
+          { value: "3-C", label: "3-C" }
           
         ]}
       />
-        <Select
-          label="Grupo"
-          {...form.getInputProps("group")}
-          data={[
-            { value: "A", label: "A" },
-            { value: "B", label: "B" },
-            { value: "C", label: "C" }
-          ]}
-        />
+        
 
       
       <Center pt={15}>

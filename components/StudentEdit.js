@@ -11,7 +11,7 @@ import { getAllGroups } from '../firebase/getDataDB';
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
-const CreateStudent = ({updateStudents}) => {
+const StudentEdit = ({updateStudents,editStudent}) => {
   const [messageError, setMessageError] = useState("");
   const [groups, setGroups] = useState([]);
 
@@ -23,41 +23,40 @@ const CreateStudent = ({updateStudents}) => {
 
   const form = useForm({
     initialValues: {
-      name: "",
+      name: editStudent.name,
       role: "alumno",
-      parentName: "",
-      group: "",
-      email: "",
+      parentName: editStudent.parentName,
+      group: editStudent.group,
+      email: editStudent.email,
       password: "",
       confirmPassword: "",
     },
   });
   const registerStudent = async () => {
-    try {
+   /*  try {
       const infoUsuario = await createUserWithEmailAndPassword(
         auth,
         form.values.email,
         form.values.password
       ).then((usuarioFirebase) => {
         return usuarioFirebase;
-      });
-      // console.log(infoUser.user.uid);
-      const docuRef = doc(firestore, `Students/${infoUsuario.user.uid}`);
+      }); */
+      const docuRef = doc(firestore, `Students/${editStudent.uid}`);
       setDoc(docuRef, {
         name: form.values.name,
         parentName: form.values.parentName,
         group: form.values.group,
         role: form.values.role,
         email: form.values.email,
-      });
-      updateStudents();
-    } catch (error) {
+      }).then( updateStudents());
+     ;
+    /* } catch (error) {
       if (
         error == "FirebaseError: Firebase: Error (auth/email-already-in-use)."
       ) {
         setMessageError("Este usuario ya esta registrado.");
       }
-    }
+    } */
   };
   return (
     <form onSubmit={form.onSubmit(registerStudent)}>
@@ -104,11 +103,11 @@ const CreateStudent = ({updateStudents}) => {
       />
       <Center pt={15}>
         <Button className={styles.post__button} type="submit">
-          Registrar
+          Editar
         </Button>
       </Center>
     </form>
   );
 };
 
-export default CreateStudent;
+export default StudentEdit;

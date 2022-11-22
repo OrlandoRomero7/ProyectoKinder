@@ -25,7 +25,6 @@ const Posts = () => {
     
   }
   //console.log(new Date(posts[1].date.seconds*1000))
-  console.log(posts)
   
   
   useEffect(() => {

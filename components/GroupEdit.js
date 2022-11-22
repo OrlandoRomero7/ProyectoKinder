@@ -19,7 +19,7 @@ import { addGroup } from "../firebase/setDataDB";
 
 const auth = getAuth(firebaseApp);
 
-const GroupEdit = ({updateGroups,editGroup}) => {
+const EditGroup = ({updateGroups,editGroup}) => {
   const firestore = getFirestore(firebaseApp);
   const [messageError, setMessageError] = useState("");
 
@@ -27,19 +27,18 @@ const GroupEdit = ({updateGroups,editGroup}) => {
 
   const form = useForm({
     initialValues: {
-      grade: "",
-      group: "",
+      group: editGroup.group,
     },
 
     
   });
 
   function editGroupModal(){
-    const grade = form.values.grade
     const group = form.values.group
-
-    const dataGroup = {grade,group};
+    const dataGroup = {group}
     addGroup(dataGroup)
+
+    updateGroups()
 
     updateGroups()
 
@@ -49,26 +48,21 @@ const GroupEdit = ({updateGroups,editGroup}) => {
   return (
     <form onSubmit={form.onSubmit(editGroupModal)}>
       <Select
-        defaultValue="uno"  
-        label="Grado"
-        {...form.getInputProps("grade")}
+        label="Grado y Grupo"
+        {...form.getInputProps("group")}
         data={[
-          { value: 'uno', label: "1" },
-          { value: "2", label: "2" },
-          { value: "3", label: "3" }
+          { value: "1-A", label: "1-A" },
+          { value: "1-B", label: "1-B" },
+          { value: "1-C", label: "1-C" },
+          { value: "2-A", label: "2-A" },
+          { value: "2-B", label: "2-B" },
+          { value: "2-C", label: "2-C" },
+          { value: "3-A", label: "3-A" },
+          { value: "3-B", label: "3-B" },
+          { value: "3-C", label: "3-C" }
           
         ]}
       />
-        <Select
-          label="Grupo"
-          defaultValue={editGroup.group}
-          {...form.getInputProps("group")}
-          data={[
-            { value: "A", label: "A" },
-            { value: "B", label: "B" },
-            { value: "C", label: "C" }
-          ]}
-        />
 
       
       <Center pt={15}>
@@ -81,4 +75,4 @@ const GroupEdit = ({updateGroups,editGroup}) => {
   );  
 };
 
-export default GroupEdit;
+export default EditGroup;

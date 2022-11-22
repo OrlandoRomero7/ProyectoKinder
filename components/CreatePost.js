@@ -14,7 +14,6 @@ const CreatePost = ({updatePosts,editPost}) => {
 
     const dataPost = {title,subject,content,date};
     addPost(dataPost)
-    console.log(dataPost)
     updatePosts()
 
   }

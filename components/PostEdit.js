@@ -19,9 +19,8 @@ const PostEdit = ({updatePosts,editPost}) => {
     const date = form.values.date
     const uid = editPost.uid
     const dataPost = {title,subject,content,date,uid};
-    editPostDB(dataPost)
-    console.log(dataPost)
-    updatePosts()
+    editPostDB(dataPost).then(updatePosts())
+    
 
   }
   const form = useForm({
@@ -29,7 +28,7 @@ const PostEdit = ({updatePosts,editPost}) => {
       title: editPost.title ,
       subject: editPost.subject,
       content: editPost.content,
-      date: Fecha(editPost.date.seconds),
+      date: Fecha(editPost.date),
     },
     validate:{
       
@@ -40,10 +39,10 @@ const PostEdit = ({updatePosts,editPost}) => {
   
   return (
     <form onSubmit={form.onSubmit(addPostModal)}>
-    <Textarea label="Título: " {...form.getInputProps(`title`)}/>
-    <Textarea label="Asunto: " {...form.getInputProps(`subject`)}/>
-    <Textarea label="Contenido: " {...form.getInputProps(`content`)}/>
-    <DatePicker placeholder=""{...form.getInputProps(`date`)} />
+    <Textarea label="Título: " {...form.getInputProps("title")}/>
+    <Textarea label="Asunto: " {...form.getInputProps("subject")}/>
+    <Textarea label="Contenido: " {...form.getInputProps("content")}/>
+    <DatePicker placeholder="" label="Fecha Entrega"{...form.getInputProps("date")} />
     <Center pt={15}>
         <Button className={styles.post__button} type="submit"> Publicar </Button>
     </Center>
