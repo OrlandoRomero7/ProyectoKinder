@@ -1,6 +1,6 @@
 import React from 'react'
 import firebaseApp from '../firebaseConfig'
-import { getFirestore,collection, getDocs } from 'firebase/firestore'
+import { getFirestore,collection, getDocs, doc, updateDoc, where, query } from 'firebase/firestore'
 
 const db = getFirestore(firebaseApp);
 
@@ -17,6 +17,18 @@ export async function getAllUsers() {
   });
   return users;
 }
+
+
+export async function updateGroup(uidgroup) {
+  const docuRef = doc(db, `Groups/${uidgroup}`);
+  
+ updateDoc(docuRef, {
+    
+    asignado: true,
+  });
+  
+}
+      
 
 export async function getAllStudents() {
   var i = 0;
@@ -36,6 +48,22 @@ export async function getAllGroups() {
   const groups = [];
   const collectionRef = collection(db, "Groups");
   const snapshot = await getDocs(collectionRef);
+  snapshot.forEach((doc) => {
+    groups.push(doc.data());
+    groups[i]['uid']=doc.id;
+    i++
+    
+  });
+  //console.log(groups)
+  
+  return groups;
+}
+
+export async function getAllGroupsNoAsignados() {
+  var i = 0;
+  const groups = [];
+  const q = query(collection(db, "Groups"), where("asignado", "!=", true));
+  const snapshot = await getDocs(q);
   snapshot.forEach((doc) => {
     groups.push(doc.data());
     groups[i]['uid']=doc.id;

@@ -14,7 +14,7 @@ import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import firebaseApp from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getAllGroups } from '../firebase/getDataDB';
+import { getAllGroupsNoAsignados, updateGroup } from '../firebase/getDataDB';
 
 const auth = getAuth(firebaseApp);
 
@@ -61,7 +61,7 @@ const CreateTeacher = ({updateUsers}) => {
   });
 
    function updateGroups() {
-    getAllGroups().then((groups) => {
+    getAllGroupsNoAsignados().then((groups) => {
       setGroups(groups);
     });
   }
@@ -95,6 +95,12 @@ const CreateTeacher = ({updateUsers}) => {
             email: form.values.email,
             group: form.values.group,
           });
+
+          if(form.values.group !== ""){
+            updateGroup(form.values.group)
+          }
+          
+                               
           updateUsers()
     } catch (error) {
       if (
@@ -125,7 +131,7 @@ const CreateTeacher = ({updateUsers}) => {
           onClick={()=>updateGroups()}
           label="Asignar Grupo"
           data={groups.map((group) => {
-            return { value: group.group, label: group.group};
+            return { value: group.uid, label: group.group};
           })}
           
           {...form.getInputProps("group")}
