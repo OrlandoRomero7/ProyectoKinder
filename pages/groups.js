@@ -1,7 +1,7 @@
 import React,{useEffect}from 'react'
 import Layout from '../components/Layout'
 import { IconEdit, IconPlus, IconTrash } from '@tabler/icons';
-import { ActionIcon, Modal, Text, Table,Button, Center,Group} from '@mantine/core';
+import { ActionIcon, Modal, Text,Table,Button, Center,Group} from '@mantine/core';
 import { useState } from 'react';
 import CreateGroup from '../components/CreateGroup';
 import styles from '../styles/Groups.module.css'

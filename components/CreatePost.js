@@ -4,8 +4,14 @@ import { useForm } from "@mantine/form";
 import styles from '../styles/Teachers.module.css'
 import { DatePicker } from '@mantine/dates';
 import { addPost } from '../firebase/setDataDB';
+import 'dayjs/locale/es';
+
+
 
 const CreatePost = ({updatePosts,editPost}) => {
+
+  var value = new Date();
+
   function addPostModal(){
     const title = form.values.title
     const subject = form.values.subject
@@ -17,6 +23,7 @@ const CreatePost = ({updatePosts,editPost}) => {
     updatePosts()
 
   }
+ 
   const form = useForm({
     initialValues: {
       title: "",
@@ -31,11 +38,13 @@ const CreatePost = ({updatePosts,editPost}) => {
     
   });
   return (
+    
     <form onSubmit={form.onSubmit(addPostModal)}>
-    <Textarea label="Título: " {...form.getInputProps("title")}/>
+    <Textarea required label="Título: " {...form.getInputProps("title")}/>
     <Textarea label="Asunto: "{...form.getInputProps("subject")}/>
     <Textarea label="Contenido: "{...form.getInputProps("content")}/>
-    <DatePicker placeholder="" label="Fecha Entrega"  {...form.getInputProps("date")}/>
+    <DatePicker locale="es" inputFormat={"DD-MMM-YYYY"} defaultDate={value}
+                placeholder="" label="Fecha Entrega"  {...form.getInputProps("date")}/>
     <Center pt={15}>
         <Button className={styles.post__button} type="submit"> Publicar </Button>
     </Center>

@@ -192,7 +192,7 @@ const AppShellComponent = ({ children }) => {
         </Header>
       }
     >
-      <Text>{children}</Text>
+      {children}
     </AppShell>
   );
 };

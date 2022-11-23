@@ -21,7 +21,7 @@ const auth = getAuth(firebaseApp);
 const CreateGroup = ({updateGroups}) => {
   const firestore = getFirestore(firebaseApp);
   const [messageError, setMessageError] = useState("");
-
+  
   
 
   const form = useForm({

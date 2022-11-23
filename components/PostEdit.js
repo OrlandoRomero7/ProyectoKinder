@@ -44,7 +44,7 @@ const PostEdit = ({updatePosts,editPost}) => {
     <Textarea label="Contenido: " {...form.getInputProps("content")}/>
     <DatePicker placeholder="" label="Fecha Entrega"{...form.getInputProps("date")} />
     <Center pt={15}>
-        <Button className={styles.post__button} type="submit"> Publicar </Button>
+        <Button className={styles.post__button} type="submit"> Aplicar Cambios </Button>
     </Center>
     
     </form>
