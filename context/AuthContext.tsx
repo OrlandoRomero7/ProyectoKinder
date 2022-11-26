@@ -4,12 +4,11 @@ import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, creat
 //import { auth } from '../firebaseConfig';
 import Home from '../pages';
 import { LoadingOverlay } from '@mantine/core';
-import firebaseApp from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import {getFirestore,doc,getDoc} from "firebase/firestore"
 
-const auth = getAuth(firebaseApp);
 
-const firestore = getFirestore(firebaseApp)
+
 
 
 const AuthContext = createContext({})

@@ -19,24 +19,7 @@ export async function getAllUsers() {
 }
 
 
-export async function assignGroupTrue(uidgroup) {
-  const docuRef = doc(db, `Groups/${uidgroup}`);
-  
- updateDoc(docuRef, {
-    
-    asignado: true,
-  });
-  
-}
-export async function asignGroupFalse(uidgroup) {
-  const docuRef = doc(db, `Groups/${uidgroup}`);
-  
- updateDoc(docuRef, {
-    
-    asignado: false,
-  });
-  
-}
+
       
 
 export async function getAllStudents() {

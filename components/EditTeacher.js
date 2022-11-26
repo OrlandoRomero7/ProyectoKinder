@@ -9,16 +9,15 @@ import {
 } from "@mantine/core";
 import styles from "../styles/Teachers.module.css";
 import { useForm } from "@mantine/form";
-import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
+import { getFirestore, doc, collection, setDoc,updateDoc } from "firebase/firestore";
 
 import { auth2, db } from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getAllGroupsNoAsignados} from '../firebase/getDataDB';
-import { assignGroupTrue } from "../firebase/setDataDB";
+import { getAllGroupsNoAsignados, assignGroupTrue } from '../firebase/getDataDB';
 
 
-const CreateTeacher = ({updateUsers}) => {
+const EditTeacher = ({updateUsers, teacherToEdit}) => {
   const [messageError, setMessageError] = useState("");
 
   const [groups, setGroups] = useState([]);
@@ -26,10 +25,10 @@ const CreateTeacher = ({updateUsers}) => {
   
   const form = useForm({
     initialValues: {
-      name: "",
-      role: "",
-      group: "",
-      email: "",
+      name: teacherToEdit.name,
+      role: teacherToEdit.role,
+      group:teacherToEdit.group,
+      email:teacherToEdit.email,
       password: "",
       confirmPassword: "",
     },
@@ -69,49 +68,48 @@ const CreateTeacher = ({updateUsers}) => {
   useEffect(() => {
     updateGroups();
   }, []);   
- 
+  
   //console.log(groups)
-  const registerUser = async () => {
-    try {
+  const editUser = async () => {
+    /* try {
       await createUserWithEmailAndPassword(
         auth2,
         form.values.email,
         form.values.password
-      ).then(async (u) => {
-        form.values.group =="" ? (
-          await setDoc(doc(db, `Users/${u.user.uid}`), {
-            name: form.values.name,
-            role: form.values.role,
-            email: form.values.email.toLowerCase(),
-            password: form.values.password
-          })
-        ) : (
-          await setDoc(doc(db, `Users/${u.user.uid}`), {
-            name: form.values.name,
-            role: form.values.role,
-            email: form.values.email.toLowerCase(),
-            group: form.values.group,
-            password: form.values.password
-          })
-          
-        )
-        if (form.values.group !== "") {
-          assignGroupTrue(form.values.group)
-        }
+      ).then(async (u) => { */
+      form.values.group===null ? (
+        await updateDoc(doc(db, `Users/${teacherToEdit.uid}`), {
+          name: form.values.name,
+          role: form.values.role,
+          email: form.values.email,
+          //group: form.values.group,
+          //password: form.values.password
+        })
+    
+       ) : (
+        await updateDoc(doc(db, `Users/${teacherToEdit.uid}`), {
+          name: form.values.name,
+          role: form.values.role,
+          email: form.values.email,
+          group: form.values.group,
+          //password: form.values.password
+        })
+    
+       )
+       updateUsers();
         
-        updateUsers()
-      })
+      /* })
     } catch (error) {
       if (
         error == "FirebaseError: Firebase: Error (auth/email-already-in-use)."
       ) {
         setMessageError("Este usuario ya esta registrado.");
       }
-    }
+    } */
   };
 
   return (
-    <form onSubmit={form.onSubmit(registerUser)}>
+    <form onSubmit={form.onSubmit(editUser)}>
       <TextInput autosize label="Nombre: " {...form.getInputProps("name")} />
       <Select
         label="Tipo de Usuario"
@@ -137,18 +135,18 @@ const CreateTeacher = ({updateUsers}) => {
         
       )}
 
-      <TextInput autosize label="Correo: " {...form.getInputProps("email")} />
+      <TextInput autosize disabled label="Correo: " {...form.getInputProps("email")} />
       {messageError != "" && (
             <Paper>
               <Text color="red">{messageError}</Text>
             </Paper>
           )}
-      <TextInput
+      {/* <TextInput
         autosize
         label="Contraseña: "
         {...form.getInputProps("password")}
       />
-      <TextInput autosize label="Confirmar contraseña: " />
+      <TextInput autosize label="Confirmar contraseña: " /> */}
       <Center pt={15}>
         <Button className={styles.post__button} type="submit">
           {" "}
@@ -159,4 +157,4 @@ const CreateTeacher = ({updateUsers}) => {
   );
 };
 
-export default CreateTeacher;
+export default EditTeacher;

@@ -5,19 +5,16 @@ import { IconPlus } from '@tabler/icons';
 import { ActionIcon, Button, Modal, Text,Table } from '@mantine/core';
 import { useState } from 'react';
 import CreateTeacher from '../components/CreateTeacher';
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore,deleteDoc,collection } from "firebase/firestore";
 import { getAllUsers } from '../firebase/getDataDB';
+import {deleteTeacher} from '../firebase/setDataDB';
 
+import { auth2, db } from "../firebaseConfig";
 
-import firebaseApp from "../firebaseConfig";
-
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { async } from '@firebase/util';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, deleteUser } from "firebase/auth";
 
 import { deleteUserAuth } from '../firebase/setDataDB';
-
-const auth = getAuth(firebaseApp);
-
+import EditTeacher from '../components/EditTeacher';
 
 
 /* const  mostrar = async () => {
@@ -37,11 +34,14 @@ const auth = getAuth(firebaseApp);
  */
 
 
-  
-
 const Teachers = () => {
   const [opened, setOpened] = useState(false);
+  const [opened2, setOpened2] = useState(false);
   const [users, setUsers] = useState([]);
+  const [teacherToEdit, setTeacherToEdit] = useState({});
+
+
+  
 
   function updateUsers() {
     getAllUsers().then((users) => {
@@ -93,16 +93,27 @@ const Teachers = () => {
             <td>{user.name}</td>
             <td>{user.role}</td>
             <td>{user.email}</td>
-            <td>{user.group==null? "N/A" : user.group}</td>
+            <td>{user.group==""? "N/A" : user.group}</td>
             <td>
-              <Button>Editar</Button>
-              <Button onClick={()=>updateUsers()}>Eliminar</Button>
+              <Button onClick={() => {setOpened2(true);setTeacherToEdit(user)}}>Editar</Button>
+              <Button onClick={()=>{deleteTeacher(user).then(()=>updateUsers())}}>Eliminar</Button>
             </td>
 
           </tr>
         ))}
       </tbody>
     </Table>
+    {teacherToEdit && (
+      <Modal
+      className={styles.modal}
+      opened={opened2}
+      onClose={() => setOpened2(false)}
+      title="Editar Personal"
+    >
+      <EditTeacher updateUsers={updateUsers} teacherToEdit={{...teacherToEdit}}/>
+    </Modal>
+
+    )}
       
 
       

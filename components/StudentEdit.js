@@ -2,14 +2,11 @@ import React,{useState,useEffect} from "react";
 import { Textarea, Button, Center, Select, TextInput } from "@mantine/core";
 import styles from "../styles/Teachers.module.css";
 import { useForm } from "@mantine/form";
-import firebaseApp from "../firebaseConfig";
+import { auth2, db } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
+import { getFirestore, doc, collection, setDoc, updateDoc } from "firebase/firestore";
 import { getAllGroups } from '../firebase/getDataDB';
 
-
-const auth = getAuth(firebaseApp);
-const firestore = getFirestore(firebaseApp);
 
 const StudentEdit = ({updateStudents,editStudent}) => {
   const [messageError, setMessageError] = useState("");
@@ -41,8 +38,8 @@ const StudentEdit = ({updateStudents,editStudent}) => {
       ).then((usuarioFirebase) => {
         return usuarioFirebase;
       }); */
-      const docuRef = doc(firestore, `Students/${editStudent.uid}`);
-      setDoc(docuRef, {
+      const docuRef = doc(db, `Students/${editStudent.uid}`);
+      updateDoc(docuRef, {
         name: form.values.name,
         parentName: form.values.parentName,
         group: form.values.group,
@@ -66,6 +63,7 @@ const StudentEdit = ({updateStudents,editStudent}) => {
         {...form.getInputProps("name")}
       />
        <Select
+          defaultValue={form.values.group}
           onClick={()=>updateGroups()}
           label="Asignar Grupo"
           data={groups.map((group) => {
@@ -84,14 +82,15 @@ const StudentEdit = ({updateStudents,editStudent}) => {
       <TextInput
         autosize
         label="Correo Institucional: "
-        {...form.getInputProps("email")}
+        disabled
+        defaultValue={form.values.email}
       />
       {messageError != "" && (
         <Paper>
           <Text color="red">{messageError}</Text>
         </Paper>
       )}
-      <TextInput
+      {/* <TextInput
         autosize
         label="Contraseña: "
         {...form.getInputProps("password")}
@@ -100,7 +99,7 @@ const StudentEdit = ({updateStudents,editStudent}) => {
         autosize
         label="Confirmar contraseña: "
         {...form.getInputProps("confirmPassword")}
-      />
+      /> */}
       <Center pt={15}>
         <Button className={styles.post__button} type="submit">
           Editar

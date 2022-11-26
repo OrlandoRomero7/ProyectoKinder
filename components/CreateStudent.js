@@ -2,14 +2,12 @@ import React,{useState,useEffect} from "react";
 import { Textarea, Button, Center, Select, TextInput } from "@mantine/core";
 import styles from "../styles/Teachers.module.css";
 import { useForm } from "@mantine/form";
-import firebaseApp from "../firebaseConfig";
+import { auth2, db } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { getAllGroups } from '../firebase/getDataDB';
 
 
-const auth = getAuth(firebaseApp);
-const firestore = getFirestore(firebaseApp);
 
 const CreateStudent = ({updateStudents}) => {
   const [messageError, setMessageError] = useState("");
@@ -34,23 +32,21 @@ const CreateStudent = ({updateStudents}) => {
   });
   const registerStudent = async () => {
     try {
-      const infoUsuario = await createUserWithEmailAndPassword(
-        auth,
+      await createUserWithEmailAndPassword(
+        auth2,
         form.values.email,
         form.values.password
-      ).then((usuarioFirebase) => {
-        return usuarioFirebase;
-      });
-      // console.log(infoUser.user.uid);
-      const docuRef = doc(firestore, `Students/${infoUsuario.user.uid}`);
-      setDoc(docuRef, {
-        name: form.values.name,
-        parentName: form.values.parentName,
-        group: form.values.group,
-        role: form.values.role,
-        email: form.values.email,
-      });
-      updateStudents();
+      ).then(async (u) => {
+        await setDoc(doc(db, `Students/${u.user.uid}`), {
+          name: form.values.name,
+          parentName: form.values.parentName,
+          role: "alumno",
+          email: form.values.email.toLocaleLowerCase(),
+          group: form.values.group,
+          password: form.values.password
+        })
+        updateStudents()
+      })
     } catch (error) {
       if (
         error == "FirebaseError: Firebase: Error (auth/email-already-in-use)."
