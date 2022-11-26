@@ -41,7 +41,8 @@ const PostEdit = ({updatePosts,editPost}) => {
     <form onSubmit={form.onSubmit(addPostModal)}>
     <Textarea label="Título: " {...form.getInputProps("title")}/>
     <Textarea label="Asunto: " {...form.getInputProps("subject")}/>
-    <Textarea label="Contenido: " {...form.getInputProps("content")}/>
+    <Textarea label="Contenido: " {...form.getInputProps("content")} minRows={4}
+        maxRows={4}/>
     <DatePicker placeholder="" label="Fecha Entrega"{...form.getInputProps("date")} />
     <Center pt={15}>
         <Button className={styles.post__button} type="submit"> Aplicar Cambios </Button>

@@ -73,8 +73,13 @@ const Posts = () => {
       
        {posts && posts.map((post,index)=>(
          
+<<<<<<< Updated upstream
         <div className={styles.post_main}>
         <div className={styles.post__container} key={index}>
+=======
+         <div className={styles.post_main}>
+          <div className={styles.post__container} key={index}>
+>>>>>>> Stashed changes
           <div className={styles.group__container}>
             <h1>1A</h1>
           </div>
@@ -119,6 +124,9 @@ const Posts = () => {
               </div>
             </Modal>
         </div>
+
+         </div>
+        
 
 
         

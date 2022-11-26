@@ -14,7 +14,7 @@ import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import firebaseApp from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getAllGroupsNoAsignados, updateGroup } from '../firebase/getDataDB';
+import { getAllGroupsNoAsignados, assignGroupTrue } from '../firebase/getDataDB';
 
 const auth = getAuth(firebaseApp);
 
@@ -67,10 +67,10 @@ const CreateTeacher = ({updateUsers}) => {
   }
   //console.log(groups)
   
-/*   useEffect(() => {
+  useEffect(() => {
     updateGroups();
   }, []);   
- */
+ 
   //console.log(groups)
   const registerUser = async () => {
     try {
@@ -97,10 +97,9 @@ const CreateTeacher = ({updateUsers}) => {
           });
 
           if(form.values.group !== ""){
-            updateGroup(form.values.group)
+            assignGroupTrue(form.values.group)
           }
-          
-                               
+                      
           updateUsers()
     } catch (error) {
       if (
