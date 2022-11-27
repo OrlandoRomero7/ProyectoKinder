@@ -37,7 +37,7 @@ const CreateStudent = ({updateStudents}) => {
         form.values.email,
         form.values.password
       ).then(async (u) => {
-        await setDoc(doc(db, `Students/${u.user.uid}`), {
+        await setDoc(doc(db, `Users/${u.user.uid}`), {
           name: form.values.name,
           parentName: form.values.parentName,
           role: "alumno",

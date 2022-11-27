@@ -19,14 +19,25 @@ export async function getAllUsers() {
 }
 
 
-
+// export async function getAllStudents() {
+//   var i = 0;
+//   const students= [];
+//   const collectionRef = collection(db, "Students"), ;
+//   const snapshot = await getDocs(collectionRef);
+//   snapshot.forEach((doc) => {
+//     students.push(doc.data());
+//     students[i]['uid']=doc.id;
+//     i++
+//   });
+//   return students;
+// }
       
 
 export async function getAllStudents() {
   var i = 0;
   const students= [];
-  const collectionRef = collection(db, "Students");
-  const snapshot = await getDocs(collectionRef);
+  const q = query(collection(db, "Users"), where("role", "==", "alumno"));
+  const snapshot = await getDocs(q);
   snapshot.forEach((doc) => {
     students.push(doc.data());
     students[i]['uid']=doc.id;

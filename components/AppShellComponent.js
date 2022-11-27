@@ -29,6 +29,7 @@ import {
   IconUser,
 } from "@tabler/icons";
 import Link from "next/link";
+import { use } from "react";
 
 const auth = getAuth(firebaseApp);
 
@@ -49,11 +50,12 @@ const signOutUser = async () => {
 
 } 
 
+
+
 const AppShellComponent = ({ children }) => {
 
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
-
   const [rol, setRol] = useState(null);
   
   useEffect(() => {
@@ -70,7 +72,6 @@ const AppShellComponent = ({ children }) => {
 
   console.log(rol)
 
-
   return (
     <AppShell 
       styles={{
@@ -81,6 +82,7 @@ const AppShellComponent = ({ children }) => {
               : theme.colors.gray[0],
         },
       }}
+
       navbarOffsetBreakpoint="sm"
       navbar={
         
@@ -95,27 +97,46 @@ const AppShellComponent = ({ children }) => {
               </div>
               </Link>
 
-              <Link href="students">
-              <div className={styles.nav__links}>
-              <FaUser color="white" size="3em"/>
-              <Text className={styles.nav__text}>Alumnos</Text>
-              </div>
-              </Link>
+              {
+                rol != 'alumno' ? (
+                <Link href="students">
+                <div className={styles.nav__links}>
+                <FaUser color="white" size="3em"/>
+                <Text className={styles.nav__text}>Alumnos</Text>
+                </div>
+                </Link>
+                ) : null
+              }
+              
+              
+              
+              {
+              rol  != "profesor" && rol != "alumno"?
+                (<div>
+                <Link href="groups">
+                <div className={styles.nav__links}>
+                <FaChalkboardTeacher color="white" size="3em"/>
+                <Text className={styles.nav__text}>Grupos</Text>
+                </div>
+                </Link>
+  
+                <Link href="teachers">
+                <div className={styles.nav__links}>
+                <FaUsers color="white" size="3em"/>
+                <Text className={styles.nav__text}>Personal</Text>
+                </div>
+                </Link>
+                </div>) : null
+
+                
+              }
+
+
               
 
-              <Link href="groups">
-              <div className={styles.nav__links}>
-              <FaChalkboardTeacher color="white" size="3em"/>
-              <Text className={styles.nav__text}>Grupos</Text>
-              </div>
-              </Link>
-
-              <Link href="teachers">
-              <div className={styles.nav__links}>
-              <FaUsers color="white" size="3em"/>
-              <Text className={styles.nav__text}>Personal</Text>
-              </div>
-              </Link>
+              
+        
+              
               <div className={styles.nav__links}>
               <a onClick={signOutUser}>
               <FaSignOutAlt color="white" size="3em"/>
@@ -124,7 +145,7 @@ const AppShellComponent = ({ children }) => {
               
               </a>
               </div>
-              
+      
                 
 
               

@@ -7,7 +7,7 @@ const Layout = ({children,tituloPagina}) => {
     <div>
         
         <Head>
-            <title>Consultorio - {tituloPagina}</title>
+            <title>Sistema Escolar - {tituloPagina}</title>
         </Head>
 
         
