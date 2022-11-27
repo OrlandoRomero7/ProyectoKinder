@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from '../styles/AppShell.module.css'
 import { FaChalkboardTeacher, FaClipboardList, FaUser, FaUsers, FaSignOutAlt} from 'react-icons/fa';
 import { signOut,getAuth } from 'firebase/auth'
@@ -49,65 +49,28 @@ const signOutUser = async () => {
 
 } 
 
-
-
-
-const  mostrar = async () => {
-
-  const [datos, setDatos] = useState('');
-
-
-  
-
-  const firestore = getFirestore(firebaseApp);
-  const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
-  const docSnap = await getDoc(docuRef);
-
-  
-  
-
-  if (docSnap.exists()) {
-    setDatos(docSnap.data().role)
-    console.log(datos)
-    //return datos
-    //setDatos(docSnap.data());
-    //console.log("Document data:", docSnap.data().role);
-  } else {
-    // doc.data() will be undefined in this case
-    //console.log("No such document!");
-  }  
-
-
-}
- 
-
-
 const AppShellComponent = ({ children }) => {
-
-  /* const [datos, setDatos] = useState('');
-
-  const  mostrar = async () => {
-    const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
-    const docSnap = await getDoc(docuRef);
-    if (docSnap.exists()) {
-      setDatos(docSnap.data().role)
-      //console.log(datos)
-      //setDatos(docSnap.data());
-      //console.log("Document data:", datos);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }  
-  } */
-
-  mostrar()
-  
-  //console.log(datos)
-
-  
 
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+
+  const [rol, setRol] = useState(null);
+  
+  useEffect(() => {
+    const  getRol = async () => {
+
+      const firestore = getFirestore(firebaseApp);
+      const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
+      const docSnap = await getDoc(docuRef);
+
+      setRol(docSnap.exists() ? docSnap.data().role : null );
+    }
+    getRol()
+  }, [])
+
+  console.log(rol)
+
+
   return (
     <AppShell 
       styles={{
