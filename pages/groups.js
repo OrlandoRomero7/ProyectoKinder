@@ -69,6 +69,7 @@ const Groups = () => {
       <thead>
         <tr>
           <th>Grado y Grupo</th>
+          <th>Asignado</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -77,6 +78,7 @@ const Groups = () => {
         {groups && groups.map((group,index)=>(
           <tr key={index}>
             <td>{group.group}</td>
+            <td>{group.asignado == true ? "SI" : "NO"}</td>
             <td>
               <div className={styles.icons}>
             <ActionIcon color='indigo' onClick={() => {setOpened2(true);setEditGroup(group)}}>

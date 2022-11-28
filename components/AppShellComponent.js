@@ -103,7 +103,7 @@ const AppShellComponent = ({ children }) => {
               </Link>
 
               {
-                rol.role != 'alumno' ? (
+                rol.role != 'alumno' && rol.role != "admin" ? (
                 <Link href="students">
                 <div className={styles.nav__links}>
                 <FaUser color="white" size="3em"/>
