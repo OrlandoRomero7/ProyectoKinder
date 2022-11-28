@@ -6,7 +6,7 @@ import { ActionIcon, Button, Modal, Text,Table } from '@mantine/core';
 import { useState } from 'react';
 import CreateTeacher from '../components/CreateTeacher';
 import { doc, getDoc, getFirestore,deleteDoc,collection } from "firebase/firestore";
-import { getAllUsers } from '../firebase/getDataDB';
+import { getAllUsers, getNombreGrupo } from '../firebase/getDataDB';
 import {deleteTeacher} from '../firebase/setDataDB';
 
 import { auth2, db } from "../firebaseConfig";
@@ -17,30 +17,14 @@ import { deleteUserAuth } from '../firebase/setDataDB';
 import EditTeacher from '../components/EditTeacher';
 
 
-/* const  mostrar = async () => {
-  const firestore = getFirestore(firebaseApp);
-  const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
-  const docSnap = await getDoc(docuRef);
-
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-  } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-  }
-
-
-}
- */
-
-
 const Teachers = () => {
   const [opened, setOpened] = useState(false);
   const [opened2, setOpened2] = useState(false);
   const [users, setUsers] = useState([]);
   const [teacherToEdit, setTeacherToEdit] = useState({});
-
-
+  var nombreGrupo = {};
+  const nombre = "";
+ 
   
 
   function updateUsers() {
@@ -73,7 +57,7 @@ const Teachers = () => {
       <br></br>
 
       
-
+  
       <Table>
       <thead>
         <tr>
@@ -87,7 +71,16 @@ const Teachers = () => {
       </thead>
         
       <tbody>
+        
         {users && users.map((user,index)=>(
+
+          nombreGrupo = getNombreGrupo(user.group),
+          
+          nombreGrupo.then((nombreGrupo) => {
+           console.log(nombreGrupo?.group);
+          }),
+
+          
           <tr key={index}>
             <td>{index + 1}</td>
             <td>{user.name}</td>
