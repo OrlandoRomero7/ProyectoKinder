@@ -8,14 +8,38 @@ import { getAllStudents} from '../firebase/getDataDB';
 import { deleteStudent } from '../firebase/setDataDB';
 import styles from '../styles/Groups.module.css'
 import StudentEdit from '../components/StudentEdit';
+import { doc, getDoc, getFirestore,deleteDoc,collection } from "firebase/firestore";
+import { auth, db } from "../firebaseConfig";
+
 
 const Students = () => {
+
   const [opened, setOpened] = useState(false);
   const [opened2, setOpened2] = useState(false);
   const [opened3, setOpened3] = useState(false);
   const [students, setStudents] = useState([]);
   const [editStudent, setEditStudent] = useState({});
   const [eliminar, setEliminar] = useState({});
+
+  const [rol, setRol] = useState({});
+  
+  useEffect(() => {
+    const  getRol = async () => {
+
+      const docuRef = doc(db, `Users/${auth.currentUser.uid}`);
+      const docSnap = await getDoc(docuRef);
+
+      setRol({
+          role : docSnap.data().role,
+          name : docSnap.data().name,
+          group: docSnap.data().group
+      });
+      
+    }
+    getRol()
+  }, [])
+
+  console.log(rol)
 
   function updateStudents() {
     getAllStudents().then((students) => {
@@ -40,7 +64,7 @@ const Students = () => {
         onClose={() => setOpened(false)}
         title="Registro Alumnos"
       >
-        <CreateStudent updateStudents={updateStudents}/>
+        <CreateStudent updateStudents={updateStudents} teacher={rol}/>
       </Modal>
       <Table>
       <thead>

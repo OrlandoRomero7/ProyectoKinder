@@ -6,12 +6,15 @@ import { auth2, db } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import { getAllGroups } from '../firebase/getDataDB';
+import { decodeId } from "../utils/formatString";
 
 
 
-const CreateStudent = ({updateStudents}) => {
+const CreateStudent = ({teacher,updateStudents}) => {
+
   const [messageError, setMessageError] = useState("");
   const [groups, setGroups] = useState([]);
+
 
   function updateGroups() {
     getAllGroups().then((groups) => {
@@ -24,7 +27,6 @@ const CreateStudent = ({updateStudents}) => {
       name: "",
       role: "alumno",
       parentName: "",
-      group: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -42,7 +44,7 @@ const CreateStudent = ({updateStudents}) => {
           parentName: form.values.parentName,
           role: "alumno",
           email: form.values.email.toLocaleLowerCase(),
-          group: form.values.group,
+          group: decodeId(teacher.group),
           password: form.values.password
         })
         updateStudents()
@@ -62,17 +64,7 @@ const CreateStudent = ({updateStudents}) => {
         label="Nombre Alumno: "
         {...form.getInputProps("name")}
       />
-       <Select
-          onClick={()=>updateGroups()}
-          label="Asignar Grupo"
-          data={groups.map((group) => {
-            return { value: group.group, label: group.group};
-          })}
-          {...form.getInputProps("group")}
-          //data={groups.map((group) => {
-            //return { value: group.uid, label: group.grade + " " + group.group};
-          //})}
-        />
+       
       <TextInput
         autosize
         label="Nombre Padre/Tutor: "
