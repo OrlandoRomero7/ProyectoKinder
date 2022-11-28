@@ -1,26 +1,30 @@
-.nav__links{
+.nav__links {
     padding-top: 1rem;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
-.nav__bar{
+
+.nav__bar {
     background-color: #02406F;
-    position:static;
-    height: auto;
+    height: 100%;
 }
-.nav__text{
+
+.nav__text {
     color: white;
     font-size: 1.5rem;
 }
-.header__main{
+
+.header__main {
     padding-left: 25vh;
 }
+
 @media screen and (max-width: 720px) {
-    .nav__bar{
+    .nav__bar {
         position: fixed;
     }
-    .header__main{
+
+    .header__main {
         padding-left: 1rem;
     }
 }

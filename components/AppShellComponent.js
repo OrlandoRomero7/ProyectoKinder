@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from '../styles/AppShell.module.css'
-import { FaChalkboardTeacher, FaClipboardList, FaUser, FaUsers, FaSignOutAlt} from 'react-icons/fa';
-import { signOut,getAuth } from 'firebase/auth'
+import { FaChalkboardTeacher, FaClipboardList, FaUser, FaUsers, FaSignOutAlt } from 'react-icons/fa';
+import { signOut, getAuth } from 'firebase/auth'
 //import { auth } from '../firebaseConfig';
 import firebaseApp from "../firebaseConfig";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
@@ -20,6 +20,8 @@ import {
   Stack,
   ThemeIcon,
   Image,
+  Skeleton,
+  Loader, Flex, Box, Group
 } from "@mantine/core";
 import {
   IconCheckupList,
@@ -30,6 +32,8 @@ import {
 } from "@tabler/icons";
 import Link from "next/link";
 import { use } from "react";
+import { NavLinkCustom } from "./NavLinkCustom";
+import { decodeId } from "../utils/formatString";
 
 const auth = getAuth(firebaseApp);
 
@@ -37,18 +41,18 @@ const firestore = getFirestore(firebaseApp);
 
 
 
-const signOutUser = async () => {  
-  return signOut(auth).then(() => { 
-      return {
-          suscess: true
-      }
-    }).catch((error) => { 
-      return {
-        error
-      }
-    })
+const signOutUser = async () => {
+  return signOut(auth).then(() => {
+    return {
+      suscess: true
+    }
+  }).catch((error) => {
+    return {
+      error
+    }
+  })
 
-} 
+}
 
 
 
@@ -57,28 +61,35 @@ const AppShellComponent = ({ children }) => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const [rol, setRol] = useState({});
-  
+  const [loader, setLoader] = useState(true)
+
   useEffect(() => {
-    const  getRol = async () => {
+    const getRol = async () => {
+      setLoader(true)
 
       const firestore = getFirestore(firebaseApp);
       const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
       const docSnap = await getDoc(docuRef);
 
       setRol({
-          role : docSnap.data().role,
-          name : docSnap.data().name,
-          group: docSnap.data().group
+        role: docSnap.data().role,
+        name: docSnap.data().name,
+        group: docSnap.data().group
       });
-      
+      setLoader(false)
     }
     getRol()
   }, [])
 
   console.log(rol)
 
+  if (loader) {
+    return null
+  }
+
   return (
-    <AppShell 
+    <AppShell
+      padding={0}
       styles={{
         main: {
           background:
@@ -90,97 +101,74 @@ const AppShellComponent = ({ children }) => {
 
       navbarOffsetBreakpoint="sm"
       navbar={
-        
-        <Navbar className={styles.nav__bar} p="md"  hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 150, lg: 125 }} >
-          
+
+        <Navbar className={styles.nav__bar} p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 150, lg: 125 }} >
+
           <Center>
             <Stack>
-              <Link href='posts'>
-              <div className={styles.nav__links}>
-              <FaClipboardList color="white" size="3em"/>
-              <Text className={styles.nav__text}>Publicaciones</Text>
-              </div>
-              </Link>
 
               {
-                rol.role != 'alumno' ? (
-                <Link href="students">
-                <div className={styles.nav__links}>
-                <FaUser color="white" size="3em"/>
-                <Text className={styles.nav__text}>Alumnos</Text>
-                </div>
-                </Link>
+                rol.role === 'alumno' ? (
+                  <NavLinkCustom Icon={FaClipboardList} href={'posts'} label={'Publicaciones'} />
+                ) : rol.role === 'profesor' ? (
+                  <>
+                    <NavLinkCustom Icon={FaClipboardList} href={'posts'} label={'Publicaciones'} />
+                    <NavLinkCustom Icon={FaUser} href={'students'} label={'Alumnos'} />
+                  </>
+
+                ) : rol.role === 'admin' ? (
+                  <>
+                    <NavLinkCustom Icon={FaClipboardList} href={'posts'} label={'Publicaciones'} />
+                    <NavLinkCustom Icon={FaChalkboardTeacher} href={'groups'} label={'Grupos'} />
+                    <NavLinkCustom Icon={FaUsers} href={'teachers'} label={'Personal'} />
+                  </>
                 ) : null
               }
-              
-              
-              
-              {
-              rol.role  != "profesor" && rol.role != "alumno"?
-                (<div>
-                <Link href="groups">
-                <div className={styles.nav__links}>
-                <FaChalkboardTeacher color="white" size="3em"/>
-                <Text className={styles.nav__text}>Grupos</Text>
-                </div>
-                </Link>
-  
-                <Link href="teachers">
-                <div className={styles.nav__links}>
-                <FaUsers color="white" size="3em"/>
-                <Text className={styles.nav__text}>Personal</Text>
-                </div>
-                </Link>
-                </div>) : null
-
-                
-              }
-
-
-              
-
-              
-        
-              
               <div className={styles.nav__links}>
-              <a onClick={signOutUser}>
-              <FaSignOutAlt color="white" size="3em"/>
-              
-              <Text className={styles.nav__text}>Salir</Text>
-              
-              </a>
-              </div>
-      
-                
+                <a onClick={signOutUser}>
+                  <FaSignOutAlt color="white" size="3em" />
 
-              
-          </Stack>
+                  <Text className={styles.nav__text}>Salir</Text>
+
+                </a>
+              </div>
+
+
+
+
+            </Stack>
           </Center>
         </Navbar>
-        
-      }
-      header={
-        <Header className={styles.header__main}height={80} p="md" pl={60}>
-          <div
-            style={{ display: "flex", alignItems: "center", height: "100%" }}
-          >
-            <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-              <Burger
-                opened={opened}
-                onClick={() => setOpened((o) => !o)}
-                size="sm"
-                color={theme.colors.gray[6]}
-                mr="xl"
-              />
-            </MediaQuery>
-            <Image width={180}src="/assets/img/aidalogo.png"></Image>
-            
 
-            
-          </div>
-        </Header>
       }
+
+
     >
+      <Box sx={{ backgroundColor: 'blue' }} className={styles.header__main} height={60} p="md" pl={60}>
+        <div
+          style={{ display: "flex", alignItems: "center", height: "100%" }}
+        >
+          <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+            <Burger
+              opened={opened}
+              onClick={() => setOpened((o) => !o)}
+              size="sm"
+              color={theme.colors.gray[6]}
+              mr="xl"
+            />
+          </MediaQuery>
+          <Group >
+            <Image alt='' width={180} src="/assets/img/aidalogo.png"></Image>
+            <Group>
+              <Text>{rol.name}</Text>
+              <Text>{decodeId(rol.group)}</Text>
+            </Group>
+          </Group>
+
+
+
+        </div>
+      </Box>
       {children}
     </AppShell>
   );
