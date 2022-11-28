@@ -56,7 +56,7 @@ const AppShellComponent = ({ children }) => {
 
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
-  const [rol, setRol] = useState(null);
+  const [rol, setRol] = useState({});
   
   useEffect(() => {
     const  getRol = async () => {
@@ -65,7 +65,12 @@ const AppShellComponent = ({ children }) => {
       const docuRef = doc(firestore, `Users/${auth.currentUser.uid}`);
       const docSnap = await getDoc(docuRef);
 
-      setRol(docSnap.exists() ? docSnap.data().role : null );
+      setRol({
+          role : docSnap.data().role,
+          name : docSnap.data().name,
+          group: docSnap.data().group
+      });
+      
     }
     getRol()
   }, [])
@@ -98,7 +103,7 @@ const AppShellComponent = ({ children }) => {
               </Link>
 
               {
-                rol != 'alumno' ? (
+                rol.role != 'alumno' ? (
                 <Link href="students">
                 <div className={styles.nav__links}>
                 <FaUser color="white" size="3em"/>
@@ -111,7 +116,7 @@ const AppShellComponent = ({ children }) => {
               
               
               {
-              rol  != "profesor" && rol != "alumno"?
+              rol.role  != "profesor" && rol.role != "alumno"?
                 (<div>
                 <Link href="groups">
                 <div className={styles.nav__links}>
