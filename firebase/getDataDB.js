@@ -46,14 +46,12 @@ export async function getAllStudents() {
   return students;
 }
 
+
 export async function getNombreGrupo(uidgroup) {
   const docuRef = doc(db, `Groups/${uidgroup}`);
   const docSnap = await getDoc(docuRef);
-      
-        
+  
   return docSnap.data();
-      
-
 }
 
 export async function getAllGroups() {

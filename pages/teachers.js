@@ -6,7 +6,7 @@ import { ActionIcon, Button, Modal, Text,Table } from '@mantine/core';
 import { useState } from 'react';
 import CreateTeacher from '../components/CreateTeacher';
 import { doc, getDoc, getFirestore,deleteDoc,collection } from "firebase/firestore";
-import { getAllUsers, getNombreGrupo } from '../firebase/getDataDB';
+import { getAllUsers, getNombreGrupo, getAllGroups } from '../firebase/getDataDB';
 import {deleteTeacher} from '../firebase/setDataDB';
 
 import { auth2, db } from "../firebaseConfig";
@@ -15,6 +15,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, de
 
 import { deleteUserAuth } from '../firebase/setDataDB';
 import EditTeacher from '../components/EditTeacher';
+import { decodeId } from '../utils/formatString';
 
 
 const Teachers = () => {
@@ -22,8 +23,7 @@ const Teachers = () => {
   const [opened2, setOpened2] = useState(false);
   const [users, setUsers] = useState([]);
   const [teacherToEdit, setTeacherToEdit] = useState({});
-  var nombreGrupo = {};
-  const nombre = "";
+  
  
   
 
@@ -37,7 +37,8 @@ const Teachers = () => {
     updateUsers();
   }, []);
 
-
+  
+  
   return (
     <Layout tituloPagina="Docentes">
       <div className={styles.new__post}>
@@ -74,19 +75,14 @@ const Teachers = () => {
         
         {users && users.map((user,index)=>(
 
-          nombreGrupo = getNombreGrupo(user.group),
           
-          nombreGrupo.then((nombreGrupo) => {
-           console.log(nombreGrupo?.group);
-          }),
-
-          
+            
           <tr key={index}>
             <td>{index + 1}</td>
             <td>{user.name}</td>
             <td>{user.role}</td>
             <td>{user.email}</td>
-            <td>{user.group==""? "N/A" : user.group}</td>
+            <td>{user.group==""? "N/A" : decodeId(user.group)}</td>
             <td>
               <Button onClick={() => {setOpened2(true);setTeacherToEdit(user)}}>Editar</Button>
               <Button onClick={()=>{deleteTeacher(user).then(()=>updateUsers())}}>Eliminar</Button>

@@ -57,9 +57,9 @@ export async function deleteStudent(student) {
 }
 
 ///Grupos
-export async function addGroup(dataGroup) {
+export async function addGroup(dataGroup, id) {
     const collectionRef = collection(db, "Groups");
-    const docRef = doc(collectionRef);
+    const docRef = doc(collectionRef, id);
     setDoc(docRef, dataGroup);
 }
 

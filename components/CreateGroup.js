@@ -15,6 +15,7 @@ import firebaseApp from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { addGroup } from "../firebase/setDataDB";
+import { encodeId } from "../utils/formatString";
 
 const auth = getAuth(firebaseApp);
 
@@ -37,9 +38,10 @@ const CreateGroup = ({updateGroups}) => {
 
   function addGroupModal(){
     const group = form.values.group
+    const id = encodeId(form.values.group)
     const asignado = false
     const dataGroup = {group, asignado}
-    addGroup(dataGroup)
+    addGroup(dataGroup, id)
 
     updateGroups()
 
