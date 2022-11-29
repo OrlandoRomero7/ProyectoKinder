@@ -33,7 +33,7 @@ Los alcances del proyecto están definidos por el tiempo de desarrollo del mismo
 El proyecto puede ser ejecutado en cualquier dispositivo, de escritorio o móvil, debido a que consiste en una página web responsiva. 
 
 Obtención:
-La página estará hosteada en versel y la base de datos en fire base. Se les otorgara un enlace para el acceso a la página y las respectivas credenciales de acceso.
+La página estará hosteada en vercel y la base de datos en firebase. Se les otorgara un enlace para el acceso a la página y las respectivas credenciales de acceso.
 
 ## Especificación de procedimientos:
 
@@ -82,12 +82,12 @@ Admin – personal – modal: En este modal se encuentra el registro del persona
 Fire base: Firebase de Google es una plataforma en la nube para el desarrollo de aplicaciones web y móvil. Está disponible para distintas plataformas (iOS, Android y web), con lo que es más rápido trabajar en el desarrollo.
 
 ## Tecnologías utilizadas:
-* Fire base
+* Firebase
 * NextJS
-* NoteJS
-* Java script
+* NodeJS
+* Java Script
 * Mantine
-* Table icons
-* Versel
+* Tabler Icons
+* Vercel
 * React
-* Css
+* CSS
