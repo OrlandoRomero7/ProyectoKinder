@@ -14,7 +14,7 @@ const Layout = ({ children, tituloPagina }) => {
 
 
       <AppShellComponent>
-        <Stack sx={{ padding: 10 }}>
+        <Stack sx={{ padding: 40 }}>
           {children}
         </Stack>
       </AppShellComponent>

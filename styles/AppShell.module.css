@@ -16,7 +16,9 @@
 }
 
 .header__main {
-    padding-left: 25vh;
+    padding-left: 15vh;
+    position: inherit;
+    width: 100%;
 }
 
 @media screen and (max-width: 720px) {

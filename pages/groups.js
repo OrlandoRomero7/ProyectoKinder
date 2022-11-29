@@ -1,13 +1,13 @@
 import React,{useEffect}from 'react'
 import Layout from '../components/Layout'
-import { IconEdit, IconPlus, IconTrash } from '@tabler/icons';
-import { ActionIcon, Modal, Text,Table,Button, Center,Group} from '@mantine/core';
+import { IconEdit, IconPlus, IconTrash, IconUsers } from '@tabler/icons';
+import { ActionIcon, Modal, Text,Table,Button, Center,Group, ScrollArea} from '@mantine/core';
 import { useState } from 'react';
 import CreateGroup from '../components/CreateGroup';
 import styles from '../styles/Groups.module.css'
 import { getAllGroups } from '../firebase/getDataDB';
 import { deleteGroup } from '../firebase/setDataDB';
-import { IconAdjustments } from '@tabler/icons';
+import { ThemeIcon } from '@mantine/core';
 import GroupEdit from '../components/GroupEdit';
 //import { openConfirmModal } from '@mantine/modals';
 
@@ -37,10 +37,69 @@ const Groups = () => {
 
   return (
     <Layout tituloPagina="Grupos">
+      <ScrollArea>
     <div className={styles.new__post}>
+      <div className={styles.group__title}>
+      <ThemeIcon variant='transparent' color="dark"> <IconUsers /></ThemeIcon>
+      <h2>Grupos</h2>
+      </div>
+      
       <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon}variant="filled"><IconPlus size={30} /></ActionIcon>
-
     </div>
+    <Center>
+    
+    
+    <Table sx={{ maxWidth: 700}}>
+      
+      <thead>
+        <tr>
+          <th><Center>Grado y Grupo</Center></th>
+          <th><Center>Asignado</Center></th>
+          <th><Center>Acción</Center></th>
+        </tr>
+      </thead>
+        
+      <tbody>
+        {groups && groups.map((group,index)=>(
+          <tr key={index}>
+            <td><Center>{group.group}</Center></td>
+            <td><Center>{group.asignado == true ? "SI" : "NO"}</Center></td>
+            <td><Center>
+              <div className={styles.icons}>
+            <ActionIcon color='indigo' onClick={() => {setOpened2(true);setEditGroup(group)}}>
+              <IconEdit size={18} />
+            </ActionIcon>
+            <ActionIcon color='red'onClick={()=>{setOpened3(true);setEliminar(group)}}>
+              <IconTrash size={18} />
+            </ActionIcon>
+            </div>
+            </Center></td>
+
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+    
+    </Center>
+    </ScrollArea>
+
+
+    
+
+    
+    {editGroup && (
+      <Modal
+      className={styles.modal}
+      opened={opened2}
+      onClose={() => setOpened2(false)}
+      title="Editar Grupo"
+      
+    >
+      
+      <GroupEdit updateGroups={updateGroups} editGroup={editGroup}/>
+    </Modal>
+
+    )}
 
     <Modal
       className={styles.modal}
@@ -52,50 +111,7 @@ const Groups = () => {
       <CreateGroup updateGroups={updateGroups}/>
     </Modal>
 
-    {editGroup && (
-      <Modal
-      className={styles.modal}
-      opened={opened2}
-      onClose={() => setOpened2(false)}
-      title="Editar Grupo"
-      
-    >
-      <GroupEdit updateGroups={updateGroups} editGroup={editGroup}/>
-    </Modal>
 
-    )}
-    <div  className={styles.table__container}>
-    <Table>
-      <thead>
-        <tr>
-          <th>Grado y Grupo</th>
-          <th>Asignado</th>
-          <th>Acción</th>
-        </tr>
-      </thead>
-        
-      <tbody>
-        {groups && groups.map((group,index)=>(
-          <tr key={index}>
-            <td>{group.group}</td>
-            <td>{group.asignado == true ? "SI" : "NO"}</td>
-            <td>
-              <div className={styles.icons}>
-            <ActionIcon color='indigo' onClick={() => {setOpened2(true);setEditGroup(group)}}>
-              <IconEdit size={18} />
-            </ActionIcon>
-            <ActionIcon color='red'onClick={()=>{setOpened3(true);setEliminar(group)}}>
-              <IconTrash size={18} />
-            </ActionIcon>
-            </div>
-            </td>
-
-          </tr>
-        ))}
-      </tbody>
-    </Table>
-    </div>
-    
 
     <Modal
         opened={opened3}
@@ -110,7 +126,7 @@ const Groups = () => {
           Confirmar
         </Button>
         </div>
-      </Modal>
+    </Modal>
     
   </Layout>
     

@@ -5,5 +5,5 @@ export const Fecha = fecha =>{
         year: 'numeric',
         day: '2-digit'
     }
-    return fechaNueva.toLocaleDateString('en-US',opciones)
+    return fechaNueva.toLocaleDateString('es-ES',opciones)
 } 

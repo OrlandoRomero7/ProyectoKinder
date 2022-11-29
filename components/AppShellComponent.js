@@ -21,7 +21,7 @@ import {
   ThemeIcon,
   Image,
   Skeleton,
-  Loader, Flex, Box, Group
+  Loader, Flex, Box, Group, ScrollArea
 } from "@mantine/core";
 import {
   IconCheckupList,
@@ -106,7 +106,6 @@ const AppShellComponent = ({ children }) => {
 
           <Center>
             <Stack>
-
               {
                 rol.role === 'alumno' ? (
                   <NavLinkCustom Icon={FaClipboardList} href={'posts'} label={'Publicaciones'} />
@@ -144,7 +143,7 @@ const AppShellComponent = ({ children }) => {
 
 
     >
-      <Box sx={{ backgroundColor: 'blue' }} className={styles.header__main} height={60} p="md" pl={60}>
+      <Box sx={{ backgroundColor: '#e6e6e6' }} className={styles.header__main} height={60} p="md" pl={60}>
         <div
           style={{ display: "flex", alignItems: "center", height: "100%" }}
         >
@@ -169,7 +168,8 @@ const AppShellComponent = ({ children }) => {
 
         </div>
       </Box>
-      {children}
+      <ScrollArea>{children}</ScrollArea>
+      
     </AppShell>
   );
 };

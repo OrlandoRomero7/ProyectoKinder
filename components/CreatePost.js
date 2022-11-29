@@ -44,7 +44,7 @@ const CreatePost = ({updatePosts,editPost}) => {
     <Textarea label="Asunto: "{...form.getInputProps("subject")}minRows={2}/>
     <Textarea label="Contenido: "{...form.getInputProps("content")} minRows={4}
         maxRows={4}/>
-    <DatePicker locale="es" inputFormat={"DD-MMM-YYYY"} defaultDate={value}
+    <DatePicker required locale="es" inputFormat={"DD-MMM-YYYY"} defaultDate={value}
                 placeholder="" label="Fecha Entrega"  {...form.getInputProps("date")}/>
     <Center pt={15}>
         <Button className={styles.post__button} type="submit"> Publicar </Button>
