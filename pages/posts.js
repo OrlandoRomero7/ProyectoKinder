@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import { Modal, Button, Menu, ActionIcon, Text, Grid, Center, Stack, Container, Group, Badge } from '@mantine/core';
-import { IconAdjustments, IconTrash, IconEdit, IconDots } from '@tabler/icons';
+import { IconAdjustments,IconUsers, IconTrash, IconEdit, IconDots, IconClipboard, IconClipboardData, IconClipboardList } from '@tabler/icons';
+import { ThemeIcon } from '@mantine/core';
 
 import { IconPlus } from '@tabler/icons';
 import { useState } from 'react';
@@ -38,7 +39,12 @@ const Posts = () => {
 
   return (
     <Layout tituloPagina="Publicaciones">
-      <div className={styles.icon__container}>
+
+      <div className={styles.new__post}>
+        <div className={styles.group__title}>
+          <ThemeIcon variant='transparent' color="dark"> <IconClipboardList /></ThemeIcon>
+          <h2>Publicaciones</h2>
+        </div>
         <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon} variant="filled"><IconPlus size={30} /></ActionIcon>
       </div>
 

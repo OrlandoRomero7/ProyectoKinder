@@ -42,7 +42,7 @@ const Groups = () => {
       <div className={styles.group__title}>
       <ThemeIcon variant='transparent' color="dark"> <IconUsers /></ThemeIcon>
       <h2>Grupos</h2>
-      </div>
+    </div>
       
       <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon}variant="filled"><IconPlus size={30} /></ActionIcon>
     </div>

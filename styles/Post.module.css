@@ -41,6 +41,20 @@
     display: flex;
     gap: 1vw
 }
+.new__post{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 62rem;
+    margin-left: 2rem;
+}
+.group__title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    gap: 1rem;
+    font-size: 1.4rem;
+}
 @media screen and (max-width: 720px) {
     .post__group{
        
@@ -52,6 +66,12 @@
     }
     .header__main {
         padding-left: 1rem;
+    }
+    .new__post{
+        display: flex;
+        justify-content: space-between;
+        margin-right: 0;
+        margin-left: 0;
     }
 }
 .post__actions{
