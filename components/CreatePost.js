@@ -9,7 +9,7 @@ import { decodeId } from "../utils/formatString";
 
 
 
-const CreatePost = ({updatePosts,editPost,teacher_group}) => {
+const CreatePost = ({updatePosts,editPost,teacher_group,closeModal}) => {
 
   var value = new Date();
 
@@ -21,7 +21,7 @@ const CreatePost = ({updatePosts,editPost,teacher_group}) => {
     var group = ""
     teacher_group.role=="admin"? group = "admin": group = decodeId(teacher_group.group)
     const dataPost = {title,subject,content,date,group};
-    addPost(dataPost)
+    addPost(dataPost).then(()=>closeModal())
     updatePosts()
 
   }
@@ -35,16 +35,31 @@ const CreatePost = ({updatePosts,editPost,teacher_group}) => {
       date: []
     },
     validate:{
+      title: (value) =>
+        value.length===0
+          ? "Escriba un titulo"
+          : null,
+      subject: (value) =>
+        value.length===0
+          ? "Escriba un asunto"
+          : null,
+      content: (value) =>
+        value.length===0
+          ? "Escriba el contenido"
+          : null,
+      date: (value) =>
+          value.length===0
+            ? "Elige una fecha"
+            : null,
       
     },
 
-   
   });
   
   return (
     
     <form onSubmit={form.onSubmit(addPostModal)}>
-    <Textarea required label="Título: " {...form.getInputProps("title")}/>
+    <Textarea label="Título: " {...form.getInputProps("title")}/>
     <Textarea label="Asunto: "{...form.getInputProps("subject")}minRows={2}/>
     <Textarea label="Contenido: "{...form.getInputProps("content")} minRows={4}
         maxRows={4}/>

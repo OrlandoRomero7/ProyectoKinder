@@ -67,6 +67,11 @@ const Posts = () => {
   return 0;
 }
 
+const closeModal = () => {
+  setOpened(false);
+  setOpened2(false);
+};
+
 
 
 
@@ -107,9 +112,9 @@ const Posts = () => {
         className={styles.modal}
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Agregar Publicación"
+        title ="Agregar Publicación"
       >
-        <CreatePost updatePosts={updatePosts}  teacher_group={rol}/>
+        <CreatePost updatePosts={updatePosts}  teacher_group={rol} closeModal={closeModal}/>
       </Modal>
 
 
@@ -121,7 +126,7 @@ const Posts = () => {
           title="Editar Post"
 
         >
-          <PostEdit updatePosts={updatePosts} editPost={{ ...editPost }} />
+          <PostEdit updatePosts={updatePosts} editPost={{ ...editPost }} closeModal={closeModal}/>
         </Modal>
 
       )}
@@ -178,8 +183,8 @@ const Posts = () => {
           </Button>
           <Button onClick={() => {
             deletePost(editPost)
-              .then(updatePosts())
-              .then(() => setOpened3(false))
+              .then(()=>{setOpened3(false);updatePosts()})
+              
           }}>
             Confirmar
           </Button>

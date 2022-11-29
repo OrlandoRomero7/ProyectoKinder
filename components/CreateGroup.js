@@ -19,7 +19,7 @@ import { encodeId } from "../utils/formatString";
 
 const auth = getAuth(firebaseApp);
 
-const CreateGroup = ({updateGroups}) => {
+const CreateGroup = ({updateGroups,closeModal}) => {
   const firestore = getFirestore(firebaseApp);
   const [messageError, setMessageError] = useState("");
   
@@ -41,9 +41,9 @@ const CreateGroup = ({updateGroups}) => {
     const id = encodeId(form.values.group)
     const asignado = false
     const dataGroup = {group, asignado}
-    addGroup(dataGroup, id)
+    addGroup(dataGroup, id).then(()=>{closeModal();updateGroups()})
 
-    updateGroups()
+    
 
   }
 

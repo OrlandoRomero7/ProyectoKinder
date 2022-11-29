@@ -42,7 +42,9 @@ const Groups = () => {
     getRol()
   }, []) */
 
-
+  const closeModal = () => {
+    setOpened(false);
+  };
 
   function updateGroups() {
     getAllGroups().then((groups) => {
@@ -134,7 +136,7 @@ const Groups = () => {
       title="Crear Grupo"
       
     >
-      <CreateGroup updateGroups={updateGroups}/>
+      <CreateGroup updateGroups={updateGroups} closeModal={closeModal}/>
     </Modal>
 
 

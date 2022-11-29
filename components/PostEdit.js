@@ -6,7 +6,7 @@ import { DatePicker } from '@mantine/dates';
 import { editPostDB } from '../firebase/setDataDB';
 import { Fecha,Fecha2 } from '../helpers/index'
 
-const PostEdit = ({updatePosts,editPost}) => {
+const PostEdit = ({updatePosts,editPost,closeModal}) => {
 
   var value = new Date();
 
@@ -20,7 +20,7 @@ const PostEdit = ({updatePosts,editPost}) => {
     const date = form.values.date
     const uid = editPost.uid
     const dataPost = {title,subject,content,date,uid};
-    editPostDB(dataPost).then(updatePosts())
+    editPostDB(dataPost).then(()=>{closeModal();updatePosts()})
     
 
   }

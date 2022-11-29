@@ -98,7 +98,7 @@ export const Login = () => {
               {" "}
               Iniciar Sesion{" "}
             </Button>
-            <a className={styles.recover}> Recuperar Contraseña </a>
+            {/* <a className={styles.recover}> Recuperar Contraseña </a> */}
           </div>
         </form>
       </div>
