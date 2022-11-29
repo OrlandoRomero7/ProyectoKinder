@@ -82,12 +82,12 @@ Admin – personal – modal: En este modal se encuentra el registro del persona
 Fire base: Firebase de Google es una plataforma en la nube para el desarrollo de aplicaciones web y móvil. Está disponible para distintas plataformas (iOS, Android y web), con lo que es más rápido trabajar en el desarrollo.
 
 ## Tecnologías utilizadas:
-* Fire base
+* Firebase
 * NextJS
-* NoteJS
-* Java script
+* NodeJS
+* Java Script
 * Mantine
-* Table icons
-* Versel
+* Tabler Icons
+* Vercel
 * React
-* Css
+* CSS
