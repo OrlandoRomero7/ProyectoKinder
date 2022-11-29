@@ -24,6 +24,7 @@ const Teachers = () => {
   const [opened2, setOpened2] = useState(false);
   const [users, setUsers] = useState([]);
   const [teacherToEdit, setTeacherToEdit] = useState({});
+  const [teacherToDelete, setTeacherToDelete] = useState({});
   const [opened3, setOpened3] = useState(false);
 
  
@@ -96,7 +97,7 @@ const Teachers = () => {
             <ActionIcon color='indigo' onClick={() => {setOpened2(true);setTeacherToEdit(user)}}>
               <IconEdit size={18} />
             </ActionIcon>
-            <ActionIcon color='red'onClick={()=>{setOpened3(true)}}>
+            <ActionIcon color='red'onClick={()=>{setOpened3(true);setTeacherToDelete(user)}}>
               <IconTrash size={18} />
             </ActionIcon>
             </div>
@@ -131,7 +132,7 @@ const Teachers = () => {
         <Button onClick={() => setOpened3(false)} color='red'>
           Cancelar
         </Button>
-        <Button onClick={()=>deleteTeacher(users).then(()=>{updateUsers()}).then(()=> setOpened3(false))}>
+        <Button onClick={()=>deleteTeacher(teacherToDelete).then(()=>{updateUsers()}).then(()=> setOpened3(false))}>
           Confirmar
         </Button>
         </div>

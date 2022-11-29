@@ -66,9 +66,9 @@ const Groups = () => {
             <td><Center>{group.asignado == true ? "SI" : "NO"}</Center></td>
             <td><Center>
               <div className={styles.icons}>
-            <ActionIcon color='indigo' onClick={() => {setOpened2(true);setEditGroup(group)}}>
+            {/* <ActionIcon color='indigo' onClick={() => {setOpened2(true);setEditGroup(group)}}>
               <IconEdit size={18} />
-            </ActionIcon>
+            </ActionIcon> */}
             <ActionIcon color='red'onClick={()=>{setOpened3(true);setEliminar(group)}}>
               <IconTrash size={18} />
             </ActionIcon>
