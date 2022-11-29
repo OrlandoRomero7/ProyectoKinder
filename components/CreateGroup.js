@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {
   Button,
   Center,
@@ -16,12 +16,15 @@ import firebaseApp from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { addGroup } from "../firebase/setDataDB";
 import { encodeId } from "../utils/formatString";
+import { getAllGroupsStatic } from "../firebase/getDataDB";
+import { setCreateValueGroup } from "../firebase/setDataDB";
 
 const auth = getAuth(firebaseApp);
 
 const CreateGroup = ({updateGroups,closeModal}) => {
   const firestore = getFirestore(firebaseApp);
   const [messageError, setMessageError] = useState("");
+  const [groups, setGroups] = useState([]);
   
   
 
@@ -42,18 +45,33 @@ const CreateGroup = ({updateGroups,closeModal}) => {
     const asignado = false
     const dataGroup = {group, asignado}
     addGroup(dataGroup, id).then(()=>{closeModal();updateGroups()})
-
     
+    setCreateValueGroup(group)
 
   }
 
+  function getAll() {
+    getAllGroupsStatic().then((groups) => {
+      setGroups(groups);
+    });
+  }
+  //console.log(groups)
+  
+  useEffect(() => {
+    getAll();
+  }, []);   
+ 
 
+  
   return (
     <form onSubmit={form.onSubmit(addGroupModal)}>
       <Select
         label="Grado y Grupo"
         {...form.getInputProps("group")}
-        data={[
+        data={groups.map((group) => {
+          return { value: group.uid, label: group.grupo};
+        })}
+        /* data={[
           { value: "1-A", label: "1-A" },
           { value: "1-B", label: "1-B" },
           { value: "1-C", label: "1-C" },
@@ -64,7 +82,7 @@ const CreateGroup = ({updateGroups,closeModal}) => {
           { value: "3-B", label: "3-B" },
           { value: "3-C", label: "3-C" }
           
-        ]}
+        ]} */
       />
         
 

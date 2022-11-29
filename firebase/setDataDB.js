@@ -97,6 +97,15 @@ async function assignGroupFalse(uidgroup) {
   });
   
 }
+export async function setCreateValueGroup(valor) {
+  const docuRef = doc(db, `GruposEstaticos/${valor}`);
+  
+ updateDoc(docuRef, {
+    
+    creado: true,
+  });
+  
+}
 
 
 //Posts

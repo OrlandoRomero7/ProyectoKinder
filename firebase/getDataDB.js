@@ -57,6 +57,23 @@ export async function getNombreGrupo(uidgroup) {
   return docSnap.data();
 }
 
+export async function getAllGroupsStatic() {
+  var i = 0;
+  const groups = [];
+  const q = query(collection(db, "GruposEstaticos"), where("creado", "==", false));
+  const snapshot = await getDocs(q);
+  snapshot.forEach((doc) => {
+    groups.push(doc.data());
+    groups[i]['uid']=doc.id;
+    i++
+    
+  });
+  //console.log(groups)
+  
+  return groups;
+}
+
+
 export async function getAllGroups() {
   var i = 0;
   const groups = [];
