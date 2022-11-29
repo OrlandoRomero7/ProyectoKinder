@@ -1,22 +1,43 @@
-![](https://imageshack.com/i/pojYEHPpp)
-![](https://imagizer.imageshack.com/v2/320x240q90/924/jYEHPp.png)
-<img src="https://imagizer.imageshack.com/v2/150x100q90/922/Al2xoI.png">
+![](https://imagizer.imageshack.com/v2/320x240q90/924/jYEHPp)
+<img align="center" src="https://imagizer.imageshack.com/v2/320x240q90/924/jYEHPp.png">
+<img align="center" src="https://imagizer.imageshack.com/v2/150x100q90/922/Al2xoI.png">
 
+<p align="center">
 Tecnológico Nacional de México  
-Campus Ensenada  
-Ingeniería en sistemas computacionales  
-Programación de dispositivos móviles IOS  
-
+</p>
+<p align="center">
+Campus Ensenada 
+</p>
+ <p align="center">
+Ingeniería en sistemas computacionales 
+</p>
+<p align="center">
+Programación de dispositivos móviles IOS
+</p>
+<p align="center">
 Documentación de proyecto: sistema para jardín de niños Aida Sullivan de Rodríguez
+</p>
 
+<p align="center">
 Docente:  
 Xenia Padilla Madrid
-
-Equipo de desarrollo:  
+</p>
+<p align="center">
+Equipo de desarrollo: 
+</p>
+<p align="center">
 Joel Drew  
-Ramón Sandoval  
-Orlando Romero  
-Gustavo Romero  
+</p>
+<p align="center">
+Ramón Sandoval 
+</p>
+<p align="center">
+Orlando Romero
+</p>
+<p align="center">
+Gustavo Romero </p>
+
+ 
 
 ## Definición general del proyecto de software:
 
