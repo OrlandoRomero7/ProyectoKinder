@@ -10,6 +10,7 @@ import styles from '../styles/Groups.module.css'
 import StudentEdit from '../components/StudentEdit';
 import { doc, getDoc, getFirestore,deleteDoc,collection } from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
+import { decodeId } from "../utils/formatString";
 
 
 const Students = () => {
@@ -35,20 +36,23 @@ const Students = () => {
           group: docSnap.data().group
       });
       
+      return docSnap.data().group;
     }
-    getRol()
+    getRol().then((roles) => {
+      getAllStudents(roles).then((students) => {
+        setStudents(students);
+      });
+    });
   }, [])
 
   //console.log(rol)
 
   function updateStudents() {
-    getAllStudents().then((students) => {
+    getAllStudents(rol.group).then((students) => {
       setStudents(students);
     });
   }
-  useEffect(() => {
-    updateStudents();
-  }, []);
+  
 
 
   return (
@@ -83,7 +87,7 @@ const Students = () => {
           <tr key={index}>
             <td>{index + 1}</td>
             <td>{student.name}</td>
-            <td>{student.group}</td>
+            <td>{decodeId(student.group)}</td>
             <td>{student.parentName}</td>
             <td>{student.email}</td>
             <td>

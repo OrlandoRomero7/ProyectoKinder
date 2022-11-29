@@ -44,7 +44,7 @@ const CreateStudent = ({teacher,updateStudents}) => {
           parentName: form.values.parentName,
           role: "alumno",
           email: form.values.email.toLocaleLowerCase(),
-          group: decodeId(teacher.group),
+          group: teacher.group,
           password: form.values.password
         })
         updateStudents()

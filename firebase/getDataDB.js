@@ -33,10 +33,11 @@ export async function getAllUsers() {
 // }
       
 
-export async function getAllStudents() {
+export async function getAllStudents(id) {
+  console.log(id)
   var i = 0;
   const students= [];
-  const q = query(collection(db, "Users"), where("role", "==", "alumno"));
+  const q = query(collection(db, "Users"), where("role", "==", "alumno"), where("group", "==", id));
   const snapshot = await getDocs(q);
   snapshot.forEach((doc) => {
     students.push(doc.data());
@@ -87,7 +88,23 @@ export async function getAllGroupsNoAsignados() {
 }
 
 export async function getAllPosts(id) {
-  console.log(id)
+  
+  var i = 0;
+  const posts = [];
+  const q = query(collection(db, "Posts"), where("group", "==", id));
+  const snapshot = await getDocs(q);
+  snapshot.forEach((doc) => {
+    posts.push(doc.data());
+    posts[i]['uid']=doc.id;
+    i++
+    
+  });
+  //console.log(id)
+  
+  return posts;
+}
+
+export async function getAllPostsGeneral() {
   var i = 0;
   const posts = [];
   const collectionRef = collection(db, "Posts");
@@ -98,7 +115,7 @@ export async function getAllPosts(id) {
     i++
     
   });
-  //console.log(id)
+  //console.log(groups)
   
   return posts;
 }

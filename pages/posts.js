@@ -3,11 +3,10 @@ import Layout from '../components/Layout'
 import { Modal, Button, Menu, ActionIcon, Text, Grid, Center, Stack, Container, Group, Badge } from '@mantine/core';
 import { IconAdjustments,IconUsers, IconTrash, IconEdit, IconDots, IconClipboard, IconClipboardData, IconClipboardList } from '@tabler/icons';
 import { ThemeIcon } from '@mantine/core';
-
 import { IconPlus } from '@tabler/icons';
 import { useState } from 'react';
 import CreatePost from '../components/CreatePost';
-import { getAllPosts } from '../firebase/getDataDB';
+import { getAllPosts, getAllPostsGeneral } from '../firebase/getDataDB';
 import { getFirestore, collection, getDoc,doc} from 'firebase/firestore'
 import { auth, db } from "../firebaseConfig";
 import { Fecha } from '../helpers/index'
@@ -37,30 +36,33 @@ const Posts = () => {
           group: docSnap.data().group
       });
       
+      return docSnap.data();
     }
-    getRol()
-  }, [])
+    getRol().then((roles) => {
 
-  //console.log(rol)
+      if(roles.role === 'admin'){
+        getAllPostsGeneral().then((posts) => {
+          setPosts(posts);
+        });
+      }else{
+        getAllPosts(decodeId(roles.group)).then((posts) => {
+          setPosts(posts);
+        });
+      }
 
+      
+    });
+  }, []);
 
-  ///cambiar a solo del grupo a que pertence
+  
   function updatePosts() {
-    console.log(rol.group)
     getAllPosts(decodeId(rol.group)).then((posts) => {
       
       setPosts(posts);
     });
 
   }
-  //console.log(new Date(posts[1].date.seconds*1000))
-
-
-  useEffect(() => {
-    updatePosts();
-
-  }, []);
-
+  
   return (
     <Layout tituloPagina="Publicaciones">
 
