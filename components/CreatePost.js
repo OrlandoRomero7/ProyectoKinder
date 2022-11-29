@@ -23,7 +23,7 @@ const CreatePost = ({ updatePosts, editPost, teacher_group, closeModal }) => {
     addPost(dataPost).then(() => closeModal());
     updatePosts();
   }
-
+  
   const form = useForm({
     initialValues: {
       title: "",
