@@ -10,13 +10,14 @@ import { getAllUsers, getNombreGrupo, getAllGroups } from '../firebase/getDataDB
 import {deleteTeacher} from '../firebase/setDataDB';
 import { ThemeIcon } from '@mantine/core';
 
-import { auth2, db } from "../firebaseConfig";
+import { auth2,auth, db } from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, deleteUser } from "firebase/auth";
 
 import { deleteUserAuth } from '../firebase/setDataDB';
 import EditTeacher from '../components/EditTeacher';
 import { decodeId } from '../utils/formatString';
+
 
 
 const Teachers = () => {
@@ -26,6 +27,25 @@ const Teachers = () => {
   const [teacherToEdit, setTeacherToEdit] = useState({});
   const [teacherToDelete, setTeacherToDelete] = useState({});
   const [opened3, setOpened3] = useState(false);
+
+/*   const [rol, setRol] = useState({});
+  
+  useEffect(() => {
+    const  getRol = async () => {
+
+      const docuRef = doc(db, `Users/${auth.currentUser.uid}`);
+      const docSnap = await getDoc(docuRef);
+
+      setRol({
+          role : docSnap.data().role,
+          name : docSnap.data().name,
+          group: docSnap.data().group
+      });
+      
+      
+    }
+    getRol()
+  }, []) */
 
  
   

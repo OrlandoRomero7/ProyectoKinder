@@ -19,10 +19,13 @@ export async function deleteTeacher(user) {
   const currentUser = auth2.currentUser
   const currentUid = currentUser.uid
   const currentGroup = user.group
+  //var currentGroup = ""
+  //user.role==admin? currentGroup="": currentGroup=user.group
   await deleteUser(currentUser).then(async () => {
     const coleccionRef = collection(db, "Users");
     const docuRef = doc(coleccionRef, currentUid);
-    await deleteDoc(docuRef).then(() => assignGroupFalse(currentGroup))
+    currentGroup==null ? await deleteDoc(docuRef) : await deleteDoc(docuRef).then(() => assignGroupFalse(currentGroup))
+
   })  
 }
 

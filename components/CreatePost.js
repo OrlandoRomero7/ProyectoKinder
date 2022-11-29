@@ -18,13 +18,14 @@ const CreatePost = ({updatePosts,editPost,teacher_group}) => {
     const subject = form.values.subject
     const content = form.values.content
     const date = form.values.date
-    const group = decodeId(teacher_group.group)
-
+    var group = ""
+    teacher_group.role=="admin"? group = "admin": group = decodeId(teacher_group.group)
     const dataPost = {title,subject,content,date,group};
     addPost(dataPost)
     updatePosts()
 
   }
+  
  
   const form = useForm({
     initialValues: {
@@ -37,8 +38,9 @@ const CreatePost = ({updatePosts,editPost,teacher_group}) => {
       
     },
 
-    
+   
   });
+  console.log(form.values.date)
   return (
     
     <form onSubmit={form.onSubmit(addPostModal)}>
@@ -46,8 +48,9 @@ const CreatePost = ({updatePosts,editPost,teacher_group}) => {
     <Textarea label="Asunto: "{...form.getInputProps("subject")}minRows={2}/>
     <Textarea label="Contenido: "{...form.getInputProps("content")} minRows={4}
         maxRows={4}/>
-    <DatePicker required locale="es" inputFormat={"DD-MMM-YYYY"} defaultDate={value}
-                placeholder="" label="Fecha Entrega"  {...form.getInputProps("date")}/>
+    
+    <DatePicker required locale="es" inputFormat={"DD/MM/YYYY"} defaultDate={value}
+                placeholder="" label="Fecha Entrega"  {...form.getInputProps("date")}/> 
     <Center pt={15}>
         <Button className={styles.post__button} type="submit"> Publicar </Button>
     </Center>

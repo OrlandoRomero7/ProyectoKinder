@@ -10,6 +10,8 @@ import { deleteGroup } from '../firebase/setDataDB';
 import { ThemeIcon } from '@mantine/core';
 import GroupEdit from '../components/GroupEdit';
 //import { openConfirmModal } from '@mantine/modals';
+import { doc, getDoc, getFirestore,deleteDoc,collection } from "firebase/firestore";
+import { auth, db } from "../firebaseConfig";
 
 
 const Groups = () => {
@@ -19,6 +21,27 @@ const Groups = () => {
   const [editGroup, setEditGroup] = useState({});
   const [eliminar, setEliminar] = useState({});
   const [opened3, setOpened3] = useState(false);
+
+
+  /* const [rol, setRol] = useState({});
+  
+  useEffect(() => {
+    const  getRol = async () => {
+
+      const docuRef = doc(db, `Users/${auth.currentUser.uid}`);
+      const docSnap = await getDoc(docuRef);
+
+      setRol({
+          role : docSnap.data().role,
+          name : docSnap.data().name,
+          group: docSnap.data().group
+      });
+      
+      
+    }
+    getRol()
+  }, []) */
+
 
 
   function updateGroups() {
@@ -36,6 +59,7 @@ const Groups = () => {
 
 
   return (
+    
     <Layout tituloPagina="Grupos">
       <ScrollArea>
     <div className={styles.new__post}>

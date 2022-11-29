@@ -31,6 +31,27 @@ const CreateStudent = ({teacher,updateStudents}) => {
       password: "",
       confirmPassword: "",
     },
+    validate: {
+      name: (value) =>
+        value.length===0
+          ? "Escriba un nombre"
+          : null,
+      parentName: (value) =>
+        value.length===0
+          ? "Escriba un nombre"
+          : null,
+      email: (value) =>
+        /^\S+@\S+$/.test(value) ? null : "Esto no es un correo",
+      password: (value) =>
+        value.length < 6
+          ? "La contraseñas deben de tener como minimo 6 caracteres"
+          : null,
+      confirmPassword: (value, values) =>
+        value != values.password
+          ? "Las contraseñas no coinciden"
+          : null,
+    
+  }, 
   });
   const registerStudent = async () => {
     try {

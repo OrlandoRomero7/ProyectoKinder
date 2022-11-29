@@ -43,7 +43,7 @@ export const Login = () => {
     try {
       await signInWithEmailAndPassword(
         auth,
-        form.values.email,
+        form.values.email.toLowerCase(),
         form.values.password
       );
       push("/posts");

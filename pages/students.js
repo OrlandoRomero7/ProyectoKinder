@@ -55,7 +55,7 @@ const Students = () => {
   
 
 
-  return (
+   return (
     <Layout tituloPagina="Alumnos">
       <div className={styles.new__post}>
         <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon}variant="filled"><IconPlus size={30} /></ActionIcon>

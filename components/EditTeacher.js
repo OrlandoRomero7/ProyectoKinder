@@ -15,7 +15,7 @@ import { auth2, db } from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getAllGroupsNoAsignados, assignGroupTrue } from '../firebase/getDataDB';
-
+import { decodeId } from "../utils/formatString";
 
 const EditTeacher = ({updateUsers, teacherToEdit}) => {
   const [messageError, setMessageError] = useState("");
@@ -27,34 +27,19 @@ const EditTeacher = ({updateUsers, teacherToEdit}) => {
     initialValues: {
       name: teacherToEdit.name,
       role: teacherToEdit.role,
-      group:teacherToEdit.group,
+      group: decodeId(teacherToEdit.group),
       email:teacherToEdit.email,
       password: "",
       confirmPassword: "",
     },
 
-    /* validate: {
+    validate: {
       name: (value) =>
         value.length===0
           ? "Escriba un nombre"
           : null,
       role: (value) => value.length==0? "Eliga una opción":null,
-      email: (value) =>
-        /^\S+@\S+$/.test(value) ? null : "Esto no es un correo",
-      password: (value) =>
-        value.length < 6
-          ? "La contraseñas deben de tener como minimo 6 caracteres"
-          : null,
-      confirmPassword: (value) =>
-        value.length < 6
-          ? "La contraseñas deben de tener como minimo 6 caracteres"
-          : null,
-      confirmPassword: (value, values) =>
-        value !== values.passwordRegistrar
-          ? "Las contraseñas no coinciden"
-          : null,
-    
-  },  */
+  },  
   
   });
 
@@ -91,7 +76,7 @@ const EditTeacher = ({updateUsers, teacherToEdit}) => {
           name: form.values.name,
           role: form.values.role,
           email: form.values.email,
-          group: form.values.group,
+          group: decodeId(form.values.group),
           //password: form.values.password
         })
     

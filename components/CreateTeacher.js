@@ -34,7 +34,7 @@ const CreateTeacher = ({updateUsers}) => {
       confirmPassword: "",
     },
 
-    /* validate: {
+    validate: {
       name: (value) =>
         value.length===0
           ? "Escriba un nombre"
@@ -46,16 +46,12 @@ const CreateTeacher = ({updateUsers}) => {
         value.length < 6
           ? "La contraseñas deben de tener como minimo 6 caracteres"
           : null,
-      confirmPassword: (value) =>
-        value.length < 6
-          ? "La contraseñas deben de tener como minimo 6 caracteres"
-          : null,
       confirmPassword: (value, values) =>
-        value !== values.passwordRegistrar
+        value != values.password
           ? "Las contraseñas no coinciden"
           : null,
     
-  },  */
+  }, 
   
   });
 
@@ -148,7 +144,7 @@ const CreateTeacher = ({updateUsers}) => {
         label="Contraseña: "
         {...form.getInputProps("password")}
       />
-      <TextInput autosize label="Confirmar contraseña: " />
+      <TextInput autosize label="Confirmar contraseña: " {...form.getInputProps("confirmPassword")}/>
       <Center pt={15}>
         <Button className={styles.post__button} type="submit">
           {" "}

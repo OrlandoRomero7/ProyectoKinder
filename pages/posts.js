@@ -40,7 +40,7 @@ const Posts = () => {
     }
     getRol().then((roles) => {
 
-      if(roles.role === 'admin'){
+      if(roles.role === "admin"){
         getAllPostsGeneral().then((posts) => {
           setPosts(posts);
         });
@@ -56,10 +56,19 @@ const Posts = () => {
 
   
   function updatePosts() {
-    getAllPosts(decodeId(rol.group)).then((posts) => {
+    if(rol.role === "admin"){
+      getAllPostsGeneral().then((posts) => {
+        setPosts(posts);
+      });
+    }else{
+      getAllPosts(decodeId(rol.group)).then((posts) => {
+        setPosts(posts);
+      });
+    }
+    /* getAllPosts(decodeId(rol.group)).then((posts) => {
       
       setPosts(posts);
-    });
+    }); */
 
   }
   
@@ -71,7 +80,10 @@ const Posts = () => {
           <ThemeIcon variant='transparent' color="dark"> <IconClipboardList /></ThemeIcon>
           <h2>Publicacionessss</h2>
         </div>
-        <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon} variant="filled"><IconPlus size={30} /></ActionIcon>
+        {rol.role!="alumno" && 
+          <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon} variant="filled"><IconPlus size={30} /></ActionIcon>
+        }
+        
       </div>
 
 
@@ -117,7 +129,10 @@ const Posts = () => {
               
               <p className={styles.post__subtitle}>{post.subject}</p>
               <p className={styles.post__text}>{post.content}</p>
-              <Menu className={styles.post__actions} shadow="md" width={200}>
+              
+              
+              {rol.role!="alumno" && 
+                <Menu className={styles.post__actions} shadow="md" width={200}>
                 <Menu.Target>
                   <ActionIcon>
                     <IconDots className={styles.postActions__icon} size={18} />
@@ -129,6 +144,9 @@ const Posts = () => {
                     <Menu.Item onClick={() => { setEditPost(post); setOpened3(true) }} color="red" icon={<IconTrash size={14} />}>Eliminar</Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
+              } 
+
+              
               </Grid.Col >
           </Grid>
       ))}

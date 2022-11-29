@@ -1,6 +1,6 @@
 import React from 'react'
 import firebaseApp from '../firebaseConfig'
-import { getFirestore,collection, getDocs, doc, updateDoc, where, query, getDoc } from 'firebase/firestore'
+import { getFirestore,collection, getDocs, doc, updateDoc, where, query, getDoc,orderBy} from 'firebase/firestore'
 
 const db = getFirestore(firebaseApp);
 
@@ -15,7 +15,8 @@ export async function getAllUsers() {
     users[i]['uid']=doc.id; 
     i++
   });
-  return users;
+  
+  return users.sort();
 }
 
 
@@ -44,7 +45,8 @@ export async function getAllStudents(id) {
     students[i]['uid']=doc.id;
     i++
   });
-  return students;
+  
+  return students.sort();
 }
 
 
@@ -91,7 +93,7 @@ export async function getAllPosts(id) {
   
   var i = 0;
   const posts = [];
-  const q = query(collection(db, "Posts"), where("group", "==", id));
+  const q = query(collection(db, "Posts"), where("group", 'in', [id, 'admin']));
   const snapshot = await getDocs(q);
   snapshot.forEach((doc) => {
     posts.push(doc.data());
@@ -107,8 +109,8 @@ export async function getAllPosts(id) {
 export async function getAllPostsGeneral() {
   var i = 0;
   const posts = [];
-  const collectionRef = collection(db, "Posts");
-  const snapshot = await getDocs(collectionRef);
+  const q = query(collection(db, "Posts"));
+  const snapshot = await getDocs(q);
   snapshot.forEach((doc) => {
     posts.push(doc.data());
     posts[i]['uid']=doc.id;
