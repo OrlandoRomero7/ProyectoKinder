@@ -39,7 +39,7 @@ const Students = () => {
     getRol()
   }, [])
 
-  console.log(rol)
+  //console.log(rol)
 
   function updateStudents() {
     getAllStudents().then((students) => {

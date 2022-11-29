@@ -5,10 +5,11 @@ import styles from '../styles/Teachers.module.css'
 import { DatePicker } from '@mantine/dates';
 import { addPost } from '../firebase/setDataDB';
 import 'dayjs/locale/es';
+import { decodeId } from "../utils/formatString";
 
 
 
-const CreatePost = ({updatePosts,editPost}) => {
+const CreatePost = ({updatePosts,editPost,teacher_group}) => {
 
   var value = new Date();
 
@@ -17,8 +18,9 @@ const CreatePost = ({updatePosts,editPost}) => {
     const subject = form.values.subject
     const content = form.values.content
     const date = form.values.date
+    const group = decodeId(teacher_group.group)
 
-    const dataPost = {title,subject,content,date};
+    const dataPost = {title,subject,content,date,group};
     addPost(dataPost)
     updatePosts()
 

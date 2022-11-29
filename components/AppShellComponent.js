@@ -81,7 +81,7 @@ const AppShellComponent = ({ children }) => {
     getRol()
   }, [])
 
-  console.log(rol)
+  //console.log(rol)
 
   if (loader) {
     return null

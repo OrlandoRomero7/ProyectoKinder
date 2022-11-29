@@ -10,20 +10,15 @@ import { getAllGroups } from '../firebase/getDataDB';
 
 const StudentEdit = ({updateStudents,editStudent}) => {
   const [messageError, setMessageError] = useState("");
-  const [groups, setGroups] = useState([]);
+  
 
-  function updateGroups() {
-    getAllGroups().then((groups) => {
-      setGroups(groups);
-    });
-  }
+  
 
   const form = useForm({
     initialValues: {
       name: editStudent.name,
       role: "alumno",
       parentName: editStudent.parentName,
-      group: editStudent.group,
       email: editStudent.email,
       password: "",
       confirmPassword: "",
@@ -38,11 +33,10 @@ const StudentEdit = ({updateStudents,editStudent}) => {
       ).then((usuarioFirebase) => {
         return usuarioFirebase;
       }); */
-      const docuRef = doc(db, `Students/${editStudent.uid}`);
+      const docuRef = doc(db, `Users/${editStudent.uid}`);
       updateDoc(docuRef, {
         name: form.values.name,
         parentName: form.values.parentName,
-        group: form.values.group,
         role: form.values.role,
         email: form.values.email,
       }).then( updateStudents());
@@ -62,18 +56,7 @@ const StudentEdit = ({updateStudents,editStudent}) => {
         label="Nombre Alumno: "
         {...form.getInputProps("name")}
       />
-       <Select
-          defaultValue={form.values.group}
-          onClick={()=>updateGroups()}
-          label="Asignar Grupo"
-          data={groups.map((group) => {
-            return { value: group.group, label: group.group};
-          })}
-          {...form.getInputProps("group")}
-          //data={groups.map((group) => {
-            //return { value: group.uid, label: group.grade + " " + group.group};
-          //})}
-        />
+       
       <TextInput
         autosize
         label="Nombre Padre/Tutor: "

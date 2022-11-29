@@ -86,7 +86,8 @@ export async function getAllGroupsNoAsignados() {
   return groups;
 }
 
-export async function getAllPosts() {
+export async function getAllPosts(id) {
+  console.log(id)
   var i = 0;
   const posts = [];
   const collectionRef = collection(db, "Posts");
@@ -97,7 +98,7 @@ export async function getAllPosts() {
     i++
     
   });
-  //console.log(groups)
+  //console.log(id)
   
   return posts;
 }

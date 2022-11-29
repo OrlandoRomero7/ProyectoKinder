@@ -36,8 +36,8 @@ export async function deleteTeacher(user) {
 } */
 
 export async function editStudentDB(dataStudent) {
-  const collectionRef = collection(db, "Students");
-  const docRef = doc(collectionRef,dataPost.uid);
+  const collectionRef = collection(db, "Users");
+  const docRef = doc(collectionRef,dataStudent.uid);
   updateDoc(docRef, dataStudent);
 }
 
@@ -50,7 +50,7 @@ export async function deleteStudent(student) {
   const currentUser = auth2.currentUser
   const currentUid = currentUser.uid
   await deleteUser(currentUser).then(async () => {
-    const coleccionRef = collection(db, "Students");
+    const coleccionRef = collection(db, "Users");
     const docuRef = doc(coleccionRef, currentUid);
     await deleteDoc(docuRef);
   })

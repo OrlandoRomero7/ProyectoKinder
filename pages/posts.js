@@ -8,12 +8,14 @@ import { IconPlus } from '@tabler/icons';
 import { useState } from 'react';
 import CreatePost from '../components/CreatePost';
 import { getAllPosts } from '../firebase/getDataDB';
-import { getFirestore, collection, getDocs } from 'firebase/firestore'
+import { getFirestore, collection, getDoc,doc} from 'firebase/firestore'
+import { auth, db } from "../firebaseConfig";
 import { Fecha } from '../helpers/index'
 import { deletePost } from '../firebase/setDataDB';
 import PostEdit from '../components/PostEdit';
 import styles from '../styles/Post.module.css'
 import 'dayjs/locale/es';
+import { decodeId } from '../utils/formatString';
 const Posts = () => {
   const [opened, setOpened] = useState(false);
   const [opened2, setOpened2] = useState(false);
@@ -21,10 +23,32 @@ const Posts = () => {
   const [editPost, setEditPost] = useState({});
   const [opened3, setOpened3] = useState(false);
 
+  const [rol, setRol] = useState({});
+  
+  useEffect(() => {
+    const  getRol = async () => {
+
+      const docuRef = doc(db, `Users/${auth.currentUser.uid}`);
+      const docSnap = await getDoc(docuRef);
+
+      setRol({
+          role : docSnap.data().role,
+          name : docSnap.data().name,
+          group: docSnap.data().group
+      });
+      
+    }
+    getRol()
+  }, [])
+
+  //console.log(rol)
 
 
+  ///cambiar a solo del grupo a que pertence
   function updatePosts() {
-    getAllPosts().then((posts) => {
+    console.log(rol.group)
+    getAllPosts(decodeId(rol.group)).then((posts) => {
+      
       setPosts(posts);
     });
 
@@ -55,7 +79,7 @@ const Posts = () => {
         onClose={() => setOpened(false)}
         title="Agregar Publicación"
       >
-        <CreatePost updatePosts={updatePosts} />
+        <CreatePost updatePosts={updatePosts}  teacher_group={rol}/>
       </Modal>
 
 
@@ -77,7 +101,7 @@ const Posts = () => {
           <Grid sx={{ maxWidth: 900}} className={styles.post__container} my="xs" key={index} >
             <Grid.Col className={styles.post__group} xs={2}>
               <div className={styles.post__group}>
-                <h1 >1A</h1>
+                <h1 >{post.group}</h1>
               </div>
             </Grid.Col>
              
