@@ -52,7 +52,23 @@ const Posts = () => {
 
       
     });
+
+    
   }, []);
+
+  function compare_date( a, b )
+  {
+  if ( a.date < b.date){
+    return -1;
+  }
+  if ( a.date> b.date){
+    return 1;
+  }
+  return 0;
+}
+
+
+
 
   
   function updatePosts() {
@@ -71,6 +87,7 @@ const Posts = () => {
     }); */
 
   }
+  
   
   return (
     <Layout tituloPagina="Publicaciones">
@@ -109,7 +126,7 @@ const Posts = () => {
 
       )}
 
-      {posts && posts.map((post, index) => (
+      {posts && posts.sort(compare_date).map((post, index) => (
         
           <Grid mx="auto" className={styles.post__container} my="xs" key={index} >
             <Grid.Col className={styles.post__group} xs={2}>

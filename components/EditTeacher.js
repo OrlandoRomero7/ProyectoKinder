@@ -16,8 +16,9 @@ import { auth2, db } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getAllGroupsNoAsignados, assignGroupTrue } from '../firebase/getDataDB';
 import { decodeId } from "../utils/formatString";
+import { closeModal } from "@mantine/modals";
 
-const EditTeacher = ({updateUsers, teacherToEdit}) => {
+const EditTeacher = ({updateUsers, teacherToEdit,closeModal}) => {
   const [messageError, setMessageError] = useState("");
 
   const [groups, setGroups] = useState([]);
@@ -42,6 +43,7 @@ const EditTeacher = ({updateUsers, teacherToEdit}) => {
   },  
   
   });
+  //console.log(decodeId(teacherToEdit.group))
 
    function updateGroups() {
     getAllGroupsNoAsignados().then((groups) => {
@@ -62,7 +64,7 @@ const EditTeacher = ({updateUsers, teacherToEdit}) => {
         form.values.email,
         form.values.password
       ).then(async (u) => { */
-      form.values.group===null ? (
+      teacherToEdit.group==null ? (
         await updateDoc(doc(db, `Users/${teacherToEdit.uid}`), {
           name: form.values.name,
           role: form.values.role,
@@ -76,12 +78,13 @@ const EditTeacher = ({updateUsers, teacherToEdit}) => {
           name: form.values.name,
           role: form.values.role,
           email: form.values.email,
-          group: decodeId(form.values.group),
+          //group: decodeId(form.values.group),
           //password: form.values.password
         })
     
        )
        updateUsers();
+       closeModal()
         
       /* })
     } catch (error) {
@@ -93,10 +96,12 @@ const EditTeacher = ({updateUsers, teacherToEdit}) => {
     } */
   };
 
+
+  // Para que cargue el grupo que tiene ocupa tener en el data una de las opciones el valor
   return (
     <form onSubmit={form.onSubmit(editUser)}>
       <TextInput autosize label="Nombre: " {...form.getInputProps("name")} />
-      <Select
+      {/* <Select
         label="Tipo de Usuario"
         {...form.getInputProps("role")}
         data={[
@@ -104,21 +109,25 @@ const EditTeacher = ({updateUsers, teacherToEdit}) => {
           { value: "profesor", label: "profesor" },
         ]}
       />
+      
       {form.values.role === "profesor" && (
         <Select
+          {...form.getInputProps("group")}
           onClick={()=>updateGroups()}
           label="Asignar Grupo"
+          
           data={groups.map((group) => {
             return { value: group.uid, label: group.group};
-          })}
+          })} 
+          //{ value: decodeId(teacherToEdit), label: decodeId(teacherToEdit)}
           
-          {...form.getInputProps("group")}
+          //{...form.getInputProps("group")}
           //data={groups.map((group) => {
             //return { value: group.uid, label: group.grade + " " + group.group};
           //})}
         />
         
-      )}
+      )} */}
 
       <TextInput autosize disabled label="Correo: " {...form.getInputProps("email")} />
       {messageError != "" && (
@@ -135,7 +144,7 @@ const EditTeacher = ({updateUsers, teacherToEdit}) => {
       <Center pt={15}>
         <Button className={styles.post__button} type="submit">
           {" "}
-          Registrar{" "}
+          Editar{" "}
         </Button>
       </Center>
     </form>

@@ -10,7 +10,7 @@ import { decodeId } from "../utils/formatString";
 
 
 
-const CreateStudent = ({teacher,updateStudents}) => {
+const CreateStudent = ({teacher,updateStudents,closeModal}) => {
 
   const [messageError, setMessageError] = useState("");
   const [groups, setGroups] = useState([]);
@@ -69,6 +69,7 @@ const CreateStudent = ({teacher,updateStudents}) => {
           password: form.values.password
         })
         updateStudents()
+        closeModal()
       })
     } catch (error) {
       if (

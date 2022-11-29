@@ -8,7 +8,7 @@ import { getFirestore, doc, collection, setDoc, updateDoc } from "firebase/fires
 import { getAllGroups } from '../firebase/getDataDB';
 
 
-const StudentEdit = ({updateStudents,editStudent}) => {
+const StudentEdit = ({updateStudents,editStudent,closeModal}) => {
   const [messageError, setMessageError] = useState("");
   
 
@@ -39,7 +39,7 @@ const StudentEdit = ({updateStudents,editStudent}) => {
         parentName: form.values.parentName,
         role: form.values.role,
         email: form.values.email,
-      }).then( updateStudents());
+      }).then(()=> {updateStudents(),closeModal()});
      ;
     /* } catch (error) {
       if (

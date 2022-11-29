@@ -45,7 +45,20 @@ const Students = () => {
     });
   }, [])
 
-  //console.log(rol)
+  function compare_name( a, b )
+  {
+  if ( a.name.toLowerCase() < b.name.toLowerCase()){
+    return -1;
+  }
+  if ( a.name.toLowerCase() > b.name.toLowerCase()){
+    return 1;
+  }
+  return 0;
+}
+const closeModal = () => {
+  setOpened(false);
+  setOpened2(false);
+};
 
   function updateStudents() {
     getAllStudents(rol.group).then((students) => {
@@ -68,7 +81,7 @@ const Students = () => {
         onClose={() => setOpened(false)}
         title="Registro Alumnos"
       >
-        <CreateStudent updateStudents={updateStudents} teacher={rol}/>
+        <CreateStudent updateStudents={updateStudents} teacher={rol} closeModal={closeModal}/>
       </Modal>
       <Table>
       <thead>
@@ -83,7 +96,7 @@ const Students = () => {
       </thead>
         
       <tbody>
-        {students && students.map((student,index)=>(
+        {students && students.sort(compare_name).map((student,index)=>(
           <tr key={index}>
             <td>{index + 1}</td>
             <td>{student.name}</td>
@@ -114,7 +127,7 @@ const Students = () => {
       title="Editar Alumno"
       
     >
-      <StudentEdit updateStudents={updateStudents} editStudent={{...editStudent}}/>
+      <StudentEdit updateStudents={updateStudents} editStudent={{...editStudent}} closeModal={closeModal}/>
     </Modal>
 
     )}

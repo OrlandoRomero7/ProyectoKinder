@@ -47,7 +47,16 @@ const Teachers = () => {
     getRol()
   }, []) */
 
- 
+  function compare_name( a, b )
+  {
+  if ( a.name.toLowerCase() < b.name.toLowerCase()){
+    return -1;
+  }
+  if ( a.name.toLowerCase() > b.name.toLowerCase()){
+    return 1;
+  }
+  return 0;
+}
   
 
   function updateUsers() {
@@ -62,6 +71,7 @@ const Teachers = () => {
 
   const closeModal = () => {
     setOpened(false);
+    setOpened2(false);
   };
   
   return (
@@ -138,7 +148,7 @@ const Teachers = () => {
       onClose={() => setOpened2(false)}
       title="Editar Personal"
     >
-      <EditTeacher updateUsers={updateUsers} teacherToEdit={{...teacherToEdit}}/>
+      <EditTeacher updateUsers={updateUsers} teacherToEdit={{...teacherToEdit}} closeModal={closeModal}/>
     </Modal>
 
     )}

@@ -40,7 +40,7 @@ const CreatePost = ({updatePosts,editPost,teacher_group}) => {
 
    
   });
-  console.log(form.values.date)
+  
   return (
     
     <form onSubmit={form.onSubmit(addPostModal)}>
