@@ -61,19 +61,21 @@ const Groups = () => {
   return (
     
     <Layout tituloPagina="Grupos">
+      <div className={styles.post_center}>
       <ScrollArea>
-    <div className={styles.new__post}>
-      <div className={styles.group__title}>
-      <ThemeIcon variant='transparent' color="dark"> <IconUsers /></ThemeIcon>
-      <h2>Grupos</h2>
-    </div>
+      
+      <div className={styles.new__post}>
+        <div className={styles.group__title}>
+        <ThemeIcon variant='transparent' color="dark"> <IconUsers /></ThemeIcon>
+        <h2>Grupos</h2>
+      </div>
       
       <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon}variant="filled"><IconPlus size={30} /></ActionIcon>
     </div>
     <Center>
     
     
-    <Table sx={{ maxWidth: 700}}>
+    <Table className={styles.table}>
       
       <thead>
         <tr>
@@ -151,7 +153,7 @@ const Groups = () => {
         </Button>
         </div>
     </Modal>
-    
+    </div>
   </Layout>
     
   )

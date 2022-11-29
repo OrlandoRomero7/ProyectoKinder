@@ -1,7 +1,7 @@
 import React from 'react'
 import AppShellComponent from './AppShellComponent'
 import Head from 'next/head'
-import { Stack } from '@mantine/core'
+import { Container, Stack } from '@mantine/core'
 
 
 const Layout = ({ children, tituloPagina }) => {
@@ -14,9 +14,9 @@ const Layout = ({ children, tituloPagina }) => {
 
 
       <AppShellComponent>
-        <Stack sx={{ padding: 40 }}>
+        <Container pt={40}>
           {children}
-        </Stack>
+          </Container>
       </AppShellComponent>
 
 

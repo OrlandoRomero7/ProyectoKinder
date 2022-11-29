@@ -2,12 +2,13 @@
     background-color: #235E8B;
     width: 2.3vw;
     float: right;
-    margin-right: 10vw;
+    vertical-align: middle;
 }
 .post__container{
     background-color: rgb(228, 228, 228);
     border-radius: 1.3rem;
     height: auto;
+    min-width: 45vw;
 }
 .post__group{
     background-color: #02406F;
@@ -44,8 +45,7 @@
 .new__post{
     display: flex;
     justify-content: space-between;
-    margin-right: 62rem;
-    margin-left: 2rem;
+    vertical-align: middle;
 }
 .group__title{
     display: flex;
@@ -57,11 +57,11 @@
 }
 @media screen and (max-width: 720px) {
     .post__group{
-       
         border-radius: 1rem 1rem 0 0;
     }
     .post__title{
         display: none;
+        justify-content: space-between;
 
     }
     .header__main {
@@ -73,7 +73,14 @@
         margin-right: 0;
         margin-left: 0;
     }
+    .post__container{
+        height: auto;
+        min-width: 100%;
+    }
 }
 .post__actions{
     float: right;
+}
+.post_center{
+    margin: 0 auto;
 }

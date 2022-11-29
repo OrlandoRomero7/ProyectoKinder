@@ -2,7 +2,6 @@
     background-color: #235E8B;
     width: 2.3vw;
     float: right;
-    margin-right: 10vw;
 }
 .modal{
     font-size: 1.7rem;
@@ -26,8 +25,7 @@
 .new__post{
     display: flex;
     justify-content: space-between;
-    margin-right: 30rem;
-    margin-left: 50rem;
+    vertical-align: middle;
 }
 .group__title{
     display: flex;
@@ -39,6 +37,12 @@
 }
 .table__title{
     background-color: #c5c5c5;
+}
+.post_center{
+    margin: 0 auto;
+}
+.table{
+    min-width: 40vw;
 }
 
 @media screen and (max-width: 720px) {

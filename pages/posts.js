@@ -74,17 +74,16 @@ const Posts = () => {
   
   return (
     <Layout tituloPagina="Publicaciones">
-
-      <div className={styles.new__post}>
-        <div className={styles.group__title}>
-          <ThemeIcon variant='transparent' color="dark"> <IconClipboardList /></ThemeIcon>
-          <h2>Publicacionessss</h2>
-        </div>
+      <div className={styles.post_center}>
+        <div className={styles.new__post}>
+          <div className={styles.group__title}>
+            <ThemeIcon variant='transparent' color="dark"> <IconClipboardList /></ThemeIcon>
+            <h2>Publicaciones</h2>
+          </div>
         {rol.role!="alumno" && 
           <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon} variant="filled"><IconPlus size={30} /></ActionIcon>
         }
-        
-      </div>
+        </div>
 
 
       <Modal
@@ -112,7 +111,7 @@ const Posts = () => {
 
       {posts && posts.map((post, index) => (
         
-          <Grid sx={{ maxWidth: 900}} className={styles.post__container} my="xs" key={index} >
+          <Grid mx="auto" className={styles.post__container} my="xs" key={index} >
             <Grid.Col className={styles.post__group} xs={2}>
               <div className={styles.post__group}>
                 <h1 >{post.group}</h1>
@@ -170,7 +169,7 @@ const Posts = () => {
         </div>
       </Modal>
 
-
+</div>
     </Layout>
   )
 }

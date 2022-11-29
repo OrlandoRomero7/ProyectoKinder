@@ -2,7 +2,6 @@
     background-color: #235E8B;
     width: 2.3vw;
     float: right;
-    margin-right: 10vw;
 }
 .modal{
     font-size: 1.7rem;
@@ -17,8 +16,7 @@
 .new__post{
     display: flex;
     justify-content: space-between;
-    margin-right: 12rem;
-    margin-left: 25rem;
+    vertical-align: middle;
 }
 .group__title{
     display: flex;
@@ -35,4 +33,10 @@
         margin-right: 0;
         margin-left: 0;
     }
+}
+.tabla{
+    min-width: 60vw;
+}
+.post_center{
+    margin: 0 auto;
 }

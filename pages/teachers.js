@@ -64,16 +64,14 @@ const Teachers = () => {
   
   return (
     <Layout tituloPagina="Docentes">
-      <div className={styles.new__post}>
-        <div className={styles.group__title}>
-        <ThemeIcon variant='transparent' color="dark"> <IconUsers /></ThemeIcon>
-        <h2>Personal</h2>
+      <div className={styles.post_center}>
+        <div className={styles.new__post}>
+          <div className={styles.group__title}>
+            <ThemeIcon variant='transparent' color="dark"> <IconUsers /></ThemeIcon>
+            <h2>Personal</h2>
+          </div>
+          <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon}variant="filled"><IconPlus size={30} /></ActionIcon>
         </div>
-
-      <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon}variant="filled"><IconPlus size={30} /></ActionIcon>
-
-      </div>
-
       <Modal
         className={styles.modal}
         opened={opened}
@@ -87,7 +85,7 @@ const Teachers = () => {
 
       
     <Center>
-      <Table sx={{ maxWidth: 1200}}>
+      <Table className={styles.tabla}>
       <thead>
       
         <tr>
@@ -157,13 +155,7 @@ const Teachers = () => {
         </Button>
         </div>
     </Modal>
-
-      
-      
-      
-
-
-      
+    </div>
     </Layout>
     
   )

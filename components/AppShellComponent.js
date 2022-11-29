@@ -143,10 +143,10 @@ const AppShellComponent = ({ children }) => {
 
 
     >
-      <Box sx={{ backgroundColor: '#e6e6e6' }} className={styles.header__main} height={60} p="md" pl={60}>
-        <div
-          style={{ display: "flex", alignItems: "center", height: "100%" }}
-        >
+      <Box className={styles.header__main} height={60} p="md" pl={60}>
+        <div style={{ height: "100%" }} >
+          
+          <div className={styles.user__container}>
           <MediaQuery largerThan="sm" styles={{ display: "none" }}>
             <Burger
               opened={opened}
@@ -156,19 +156,20 @@ const AppShellComponent = ({ children }) => {
               mr="xl"
             />
           </MediaQuery>
-          <Group >
-            <Image alt='' width={180} src="/assets/img/aidalogo.png"></Image>
-            <Group>
+            <Image className={styles.header__image} alt=''  width={180} src="/assets/img/aidalogo.png"></Image>
+            <Group className={styles.user__info}>
               <Text>{rol.name}</Text>
               <Text>{decodeId(rol.group)}</Text>
             </Group>
-          </Group>
+          </div>
 
 
 
         </div>
       </Box>
-      <ScrollArea>{children}</ScrollArea>
+      <ScrollArea>
+        {children}
+        </ScrollArea>
       
     </AppShell>
   );

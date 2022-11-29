@@ -16,9 +16,12 @@
 }
 
 .header__main {
-    padding-left: 15vh;
+    padding-left: 5vh;
     position: inherit;
     width: 100%;
+    box-shadow: 1px 1px 7px 1px rgb(87, 87, 87);
+
+
 }
 
 @media screen and (max-width: 720px) {
@@ -29,4 +32,17 @@
     .header__main {
         padding-left: 1rem;
     }
+    
+}
+.user__container{
+    display: flex;
+    justify-content: space-between;
+}
+.user__info{
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #02406F;
+    padding-right: 5vw;
+   
 }
