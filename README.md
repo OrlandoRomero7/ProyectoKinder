@@ -1,22 +1,22 @@
 ![](https://imageshack.com/i/pojYEHPpp)
-![](https://imageshack.com/i/pmAl2xoIp)
-<img src="https://imageshack.com/i/pmAl2xoIp">
+![](https://imagizer.imageshack.com/v2/320x240q90/924/jYEHPp.png)
+<img src="https://imagizer.imageshack.com/v2/150x100q90/922/Al2xoI.png">
 
-Tecnológico Nacional de México 
-Campus Ensenada
-Ingeniería en sistemas computacionales
-Programación de dispositivos móviles IOS
+Tecnológico Nacional de México  
+Campus Ensenada  
+Ingeniería en sistemas computacionales  
+Programación de dispositivos móviles IOS  
 
 Documentación de proyecto: sistema para jardín de niños Aida Sullivan de Rodríguez
 
-Docente:
+Docente:  
 Xenia Padilla Madrid
 
-Equipo de desarrollo:
-Joel Drew
-Ramón Sandoval
-Orlando Romero
-Gustavo Romero
+Equipo de desarrollo:  
+Joel Drew  
+Ramón Sandoval  
+Orlando Romero  
+Gustavo Romero  
 
 ## Definición general del proyecto de software:
 
@@ -57,6 +57,7 @@ Dividimos los integrantes del equipo en 4 areas, back end, front end, líder y d
 ## Diagrama de módulos:
 
 ![](https://imageshack.com/i/pnc2U7zPj)
+<img src="https://imagizer.imageshack.com/img923/9875/c2U7zP.jpg">
 
 ### Descripciones de los módulos:
 Admin – Alumnos – Modal: Este módulo cumple la función para registrar alumnos, con ciertos datos previamente adquiridos, de tal manera que se guarda la información en una base de datos en la nube.
@@ -81,12 +82,12 @@ Admin – personal – modal: En este modal se encuentra el registro del persona
 Fire base: Firebase de Google es una plataforma en la nube para el desarrollo de aplicaciones web y móvil. Está disponible para distintas plataformas (iOS, Android y web), con lo que es más rápido trabajar en el desarrollo.
 
 ## Tecnologías utilizadas:
-Fire base
-NextJS
-NoteJS
-Java script
-Mantine
-Table icons
-Versel
-React
-Css
+* Fire base
+* NextJS
+* NoteJS
+* Java script
+* Mantine
+* Table icons
+* Versel
+* React
+* Css
