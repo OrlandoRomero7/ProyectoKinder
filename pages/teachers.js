@@ -60,7 +60,9 @@ const Teachers = () => {
     updateUsers();
   }, []);
 
-  
+  const closeModal = () => {
+    setOpened(false);
+  };
   
   return (
     <Layout tituloPagina="Docentes">
@@ -78,7 +80,7 @@ const Teachers = () => {
         onClose={() => setOpened(false)}
         title="Registro Personal"
       >
-        <CreateTeacher updateUsers={updateUsers}/>
+        <CreateTeacher updateUsers={updateUsers} closeModal={closeModal}/>
       </Modal>
 
       <br></br>

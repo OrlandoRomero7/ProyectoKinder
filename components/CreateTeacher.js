@@ -18,9 +18,8 @@ import { getAllGroupsNoAsignados} from '../firebase/getDataDB';
 import { assignGroupTrue } from "../firebase/setDataDB";
 
 
-const CreateTeacher = ({updateUsers}) => {
+const CreateTeacher = ({updateUsers, closeModal}) => {
   const [messageError, setMessageError] = useState("");
-
   const [groups, setGroups] = useState([]);
 
   
@@ -95,7 +94,8 @@ const CreateTeacher = ({updateUsers}) => {
           assignGroupTrue(form.values.group)
         }
         
-        updateUsers()
+        updateUsers();
+        closeModal();
       })
     } catch (error) {
       if (
