@@ -33,7 +33,7 @@ Los alcances del proyecto están definidos por el tiempo de desarrollo del mismo
 El proyecto puede ser ejecutado en cualquier dispositivo, de escritorio o móvil, debido a que consiste en una página web responsiva. 
 
 Obtención:
-La página estará hosteada en versel y la base de datos en fire base. Se les otorgara un enlace para el acceso a la página y las respectivas credenciales de acceso.
+La página estará hosteada en vercel y la base de datos en firebase. Se les otorgara un enlace para el acceso a la página y las respectivas credenciales de acceso.
 
 ## Especificación de procedimientos:
 
