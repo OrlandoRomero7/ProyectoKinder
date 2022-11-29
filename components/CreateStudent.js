@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Textarea, Button, Center, Select, TextInput } from "@mantine/core";
+import { Textarea, Button, Center, Select, TextInput,Paper,Text } from "@mantine/core";
 import styles from "../styles/Teachers.module.css";
 import { useForm } from "@mantine/form";
 import { auth2, db } from "../firebaseConfig";
