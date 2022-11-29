@@ -11,7 +11,7 @@ import {
 import { useForm } from "@mantine/form";
 import styles from "../styles/Login.module.css";
 import Link from "next/link";
-import { signInWithEmailAndPassword,getAuth } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 //import { auth } from "../firebaseConfig";
 import { useRouter } from "next/router";
 import firebaseApp from "../firebaseConfig";
@@ -83,7 +83,9 @@ export const Login = () => {
           />
           {messageError != "" && (
             <Paper>
-              <Text size={14} color="red">{messageError}</Text>
+              <Text size={14} color="red">
+                {messageError}
+              </Text>
             </Paper>
           )}
 

@@ -1,42 +1,42 @@
-.post__icon{
-    background-color: #235E8B;
-    width: 2.3vw;
-    float: right;
+.post__icon {
+  background-color: #235e8b;
+  width: 2.3vw;
+  float: right;
 }
-.modal{
-    font-size: 1.7rem;
+.modal {
+  font-size: 1.7rem;
 }
-.post__button{
-    background-color: #235E8B;
-    width: 100%;
+.post__button {
+  background-color: #235e8b;
+  width: 100%;
 }
-.icons{
-    display: flex;
+.icons {
+  display: flex;
 }
-.new__post{
-    display: flex;
-    justify-content: space-between;
-    vertical-align: middle;
+.new__post {
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
 }
-.group__title{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-    gap: 1rem;
-    font-size: 1.4rem;
+.group__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  gap: 1rem;
+  font-size: 1.4rem;
 }
 @media screen and (max-width: 720px) {
-    .new__post{
-        display: flex;
-        justify-content: space-between;
-        margin-right: 0;
-        margin-left: 0;
-    }
+  .new__post {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0;
+    margin-left: 0;
+  }
 }
-.tabla{
-    min-width: 60vw;
+.tabla {
+  min-width: 60vw;
 }
-.post_center{
-    margin: 0 auto;
+.post_center {
+  margin: 0 auto;
 }

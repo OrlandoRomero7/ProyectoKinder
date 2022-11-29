@@ -1,20 +1,16 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Textarea, Button, Center, Select, TextInput } from "@mantine/core";
 import styles from "../styles/Teachers.module.css";
 import { useForm } from "@mantine/form";
 import { auth2, db } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
-import { getAllGroups } from '../firebase/getDataDB';
+import { getAllGroups } from "../firebase/getDataDB";
 import { decodeId } from "../utils/formatString";
 
-
-
-const CreateStudent = ({teacher,updateStudents,closeModal}) => {
-
+const CreateStudent = ({ teacher, updateStudents, closeModal }) => {
   const [messageError, setMessageError] = useState("");
   const [groups, setGroups] = useState([]);
-
 
   function updateGroups() {
     getAllGroups().then((groups) => {
@@ -32,14 +28,8 @@ const CreateStudent = ({teacher,updateStudents,closeModal}) => {
       confirmPassword: "",
     },
     validate: {
-      name: (value) =>
-        value.length===0
-          ? "Escriba un nombre"
-          : null,
-      parentName: (value) =>
-        value.length===0
-          ? "Escriba un nombre"
-          : null,
+      name: (value) => (value.length === 0 ? "Escriba un nombre" : null),
+      parentName: (value) => (value.length === 0 ? "Escriba un nombre" : null),
       email: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Esto no es un correo",
       password: (value) =>
@@ -47,11 +37,8 @@ const CreateStudent = ({teacher,updateStudents,closeModal}) => {
           ? "La contraseñas deben de tener como minimo 6 caracteres"
           : null,
       confirmPassword: (value, values) =>
-        value != values.password
-          ? "Las contraseñas no coinciden"
-          : null,
-    
-  }, 
+        value != values.password ? "Las contraseñas no coinciden" : null,
+    },
   });
   const registerStudent = async () => {
     try {
@@ -66,11 +53,11 @@ const CreateStudent = ({teacher,updateStudents,closeModal}) => {
           role: "alumno",
           email: form.values.email.toLocaleLowerCase(),
           group: teacher.group,
-          password: form.values.password
-        })
-        updateStudents()
-        closeModal()
-      })
+          password: form.values.password,
+        });
+        updateStudents();
+        closeModal();
+      });
     } catch (error) {
       if (
         error == "FirebaseError: Firebase: Error (auth/email-already-in-use)."
@@ -86,7 +73,7 @@ const CreateStudent = ({teacher,updateStudents,closeModal}) => {
         label="Nombre Alumno: "
         {...form.getInputProps("name")}
       />
-       
+
       <TextInput
         autosize
         label="Nombre Padre/Tutor: "

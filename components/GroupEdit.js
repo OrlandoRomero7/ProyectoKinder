@@ -1,12 +1,5 @@
-import React,{useState} from "react";
-import {
-  Button,
-  Center,
-  Select,
-  TextInput,
-  Paper,
-  Text,
-} from "@mantine/core";
+import React, { useState } from "react";
+import { Button, Center, Select, TextInput, Paper, Text } from "@mantine/core";
 import styles from "../styles/Teachers.module.css";
 import { useForm } from "@mantine/form";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
@@ -14,34 +7,26 @@ import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
 import firebaseApp from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import {editGroupDB } from "../firebase/setDataDB";
-
+import { editGroupDB } from "../firebase/setDataDB";
 
 const auth = getAuth(firebaseApp);
 
-const EditGroup = ({updateGroups,editGroup}) => {
+const EditGroup = ({ updateGroups, editGroup }) => {
   const firestore = getFirestore(firebaseApp);
   const [messageError, setMessageError] = useState("");
-
-  
 
   const form = useForm({
     initialValues: {
       group: editGroup.group,
     },
-
-    
   });
 
-  function editGroupModal(){
-    const group = form.values.group
-    const uid = editGroup.uid
-    const dataGroup = {group,uid}
-    editGroupDB(dataGroup).then(updateGroups())
-
-
+  function editGroupModal() {
+    const group = form.values.group;
+    const uid = editGroup.uid;
+    const dataGroup = { group, uid };
+    editGroupDB(dataGroup).then(updateGroups());
   }
-
 
   return (
     <form onSubmit={form.onSubmit(editGroupModal)}>
@@ -57,12 +42,10 @@ const EditGroup = ({updateGroups,editGroup}) => {
           { value: "2-C", label: "2-C" },
           { value: "3-A", label: "3-A" },
           { value: "3-B", label: "3-B" },
-          { value: "3-C", label: "3-C" }
-          
+          { value: "3-C", label: "3-C" },
         ]}
       />
 
-      
       <Center pt={15}>
         <Button className={styles.post__button} type="submit">
           {" "}
@@ -70,7 +53,7 @@ const EditGroup = ({updateGroups,editGroup}) => {
         </Button>
       </Center>
     </form>
-  );  
+  );
 };
 
 export default EditGroup;

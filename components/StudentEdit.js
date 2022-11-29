@@ -1,18 +1,20 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Textarea, Button, Center, Select, TextInput } from "@mantine/core";
 import styles from "../styles/Teachers.module.css";
 import { useForm } from "@mantine/form";
 import { auth2, db } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, collection, setDoc, updateDoc } from "firebase/firestore";
-import { getAllGroups } from '../firebase/getDataDB';
+import {
+  getFirestore,
+  doc,
+  collection,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { getAllGroups } from "../firebase/getDataDB";
 
-
-const StudentEdit = ({updateStudents,editStudent,closeModal}) => {
+const StudentEdit = ({ updateStudents, editStudent, closeModal }) => {
   const [messageError, setMessageError] = useState("");
-  
-
-  
 
   const form = useForm({
     initialValues: {
@@ -25,7 +27,7 @@ const StudentEdit = ({updateStudents,editStudent,closeModal}) => {
     },
   });
   const registerStudent = async () => {
-   /*  try {
+    /*  try {
       const infoUsuario = await createUserWithEmailAndPassword(
         auth,
         form.values.email,
@@ -33,14 +35,15 @@ const StudentEdit = ({updateStudents,editStudent,closeModal}) => {
       ).then((usuarioFirebase) => {
         return usuarioFirebase;
       }); */
-      const docuRef = doc(db, `Users/${editStudent.uid}`);
-      updateDoc(docuRef, {
-        name: form.values.name,
-        parentName: form.values.parentName,
-        role: form.values.role,
-        email: form.values.email,
-      }).then(()=> {updateStudents(),closeModal()});
-     ;
+    const docuRef = doc(db, `Users/${editStudent.uid}`);
+    updateDoc(docuRef, {
+      name: form.values.name,
+      parentName: form.values.parentName,
+      role: form.values.role,
+      email: form.values.email,
+    }).then(() => {
+      updateStudents(), closeModal();
+    });
     /* } catch (error) {
       if (
         error == "FirebaseError: Firebase: Error (auth/email-already-in-use)."
@@ -56,7 +59,7 @@ const StudentEdit = ({updateStudents,editStudent,closeModal}) => {
         label="Nombre Alumno: "
         {...form.getInputProps("name")}
       />
-       
+
       <TextInput
         autosize
         label="Nombre Padre/Tutor: "

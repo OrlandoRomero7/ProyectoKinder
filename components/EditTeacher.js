@@ -1,61 +1,58 @@
-import React,{useState,useEffect} from "react";
-import {
-  Button,
-  Center,
-  Select,
-  TextInput,
-  Paper,
-  Text,
-} from "@mantine/core";
+import React, { useState, useEffect } from "react";
+import { Button, Center, Select, TextInput, Paper, Text } from "@mantine/core";
 import styles from "../styles/Teachers.module.css";
 import { useForm } from "@mantine/form";
-import { getFirestore, doc, collection, setDoc,updateDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  collection,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 
 import { auth2, db } from "../firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getAllGroupsNoAsignados, assignGroupTrue } from '../firebase/getDataDB';
+import {
+  getAllGroupsNoAsignados,
+  assignGroupTrue,
+} from "../firebase/getDataDB";
 import { decodeId } from "../utils/formatString";
 import { closeModal } from "@mantine/modals";
 
-const EditTeacher = ({updateUsers, teacherToEdit,closeModal}) => {
+const EditTeacher = ({ updateUsers, teacherToEdit, closeModal }) => {
   const [messageError, setMessageError] = useState("");
 
   const [groups, setGroups] = useState([]);
 
-  
   const form = useForm({
     initialValues: {
       name: teacherToEdit.name,
       role: teacherToEdit.role,
       group: decodeId(teacherToEdit.group),
-      email:teacherToEdit.email,
+      email: teacherToEdit.email,
       password: "",
       confirmPassword: "",
     },
 
     validate: {
-      name: (value) =>
-        value.length===0
-          ? "Escriba un nombre"
-          : null,
-      role: (value) => value.length==0? "Eliga una opción":null,
-  },  
-  
+      name: (value) => (value.length === 0 ? "Escriba un nombre" : null),
+      role: (value) => (value.length == 0 ? "Eliga una opción" : null),
+    },
   });
   //console.log(decodeId(teacherToEdit.group))
 
-   function updateGroups() {
+  function updateGroups() {
     getAllGroupsNoAsignados().then((groups) => {
       setGroups(groups);
     });
   }
   //console.log(groups)
-  
+
   useEffect(() => {
     updateGroups();
-  }, []);   
-  
+  }, []);
+
   //console.log(groups)
   const editUser = async () => {
     /* try {
@@ -64,29 +61,25 @@ const EditTeacher = ({updateUsers, teacherToEdit,closeModal}) => {
         form.values.email,
         form.values.password
       ).then(async (u) => { */
-      teacherToEdit.group==null ? (
-        await updateDoc(doc(db, `Users/${teacherToEdit.uid}`), {
+    teacherToEdit.group == null
+      ? await updateDoc(doc(db, `Users/${teacherToEdit.uid}`), {
           name: form.values.name,
           role: form.values.role,
           email: form.values.email,
           //group: form.values.group,
           //password: form.values.password
         })
-    
-       ) : (
-        await updateDoc(doc(db, `Users/${teacherToEdit.uid}`), {
+      : await updateDoc(doc(db, `Users/${teacherToEdit.uid}`), {
           name: form.values.name,
           role: form.values.role,
           email: form.values.email,
           //group: decodeId(form.values.group),
           //password: form.values.password
-        })
-    
-       )
-       updateUsers();
-       closeModal()
-        
-      /* })
+        });
+    updateUsers();
+    closeModal();
+
+    /* })
     } catch (error) {
       if (
         error == "FirebaseError: Firebase: Error (auth/email-already-in-use)."
@@ -95,7 +88,6 @@ const EditTeacher = ({updateUsers, teacherToEdit,closeModal}) => {
       }
     } */
   };
-
 
   // Para que cargue el grupo que tiene ocupa tener en el data una de las opciones el valor
   return (
@@ -129,12 +121,17 @@ const EditTeacher = ({updateUsers, teacherToEdit,closeModal}) => {
         
       )} */}
 
-      <TextInput autosize disabled label="Correo: " {...form.getInputProps("email")} />
+      <TextInput
+        autosize
+        disabled
+        label="Correo: "
+        {...form.getInputProps("email")}
+      />
       {messageError != "" && (
-            <Paper>
-              <Text color="red">{messageError}</Text>
-            </Paper>
-          )}
+        <Paper>
+          <Text color="red">{messageError}</Text>
+        </Paper>
+      )}
       {/* <TextInput
         autosize
         label="Contraseña: "
