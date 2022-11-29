@@ -43,7 +43,7 @@ const Posts = () => {
       <div className={styles.new__post}>
         <div className={styles.group__title}>
           <ThemeIcon variant='transparent' color="dark"> <IconClipboardList /></ThemeIcon>
-          <h2>Publicaciones</h2>
+          <h2>Publicacionessss</h2>
         </div>
         <ActionIcon onClick={() => setOpened(true)} className={styles.post__icon} variant="filled"><IconPlus size={30} /></ActionIcon>
       </div>
