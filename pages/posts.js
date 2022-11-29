@@ -114,7 +114,7 @@ const Posts = () => {
           <Grid mx="auto" className={styles.post__container} my="xs" key={index} >
             <Grid.Col className={styles.post__group} xs={2}>
               <div className={styles.post__group}>
-                <h1 >{post.group}</h1>
+                <h1 >{post.group === "admin" ? "Dir." : post.group }</h1>
               </div>
             </Grid.Col>
              
